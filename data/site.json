@@ -4,10 +4,20 @@
   "tagline": "ここにひとことキャッチコピー",
   "location": "Tokyo, Japan",
   "mv": "images/mv.svg",
+  "mvText": "dark",
   "sns": [
-    { "label": "Instagram", "url": "https://www.instagram.com/" },
-    { "label": "X", "url": "https://x.com/" },
-    { "label": "Mail", "url": "mailto:hello@example.com" }
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/"
+    },
+    {
+      "label": "X",
+      "url": "https://x.com/"
+    },
+    {
+      "label": "Mail",
+      "url": "mailto:hello@example.com"
+    }
   ],
   "instagram": {
     "profileUrl": "https://www.instagram.com/",
@@ -16,14 +26,21 @@
     "manual": []
   },
   "profile": {
-    "photo": "",
+    "photo": "images/profile.jpg",
     "bio": [
       "ここに自己紹介文を書きます。",
       "段落ごとに分けて書けます。"
     ],
     "history": [
-      { "year": "2026", "text": "ポートフォリオサイト公開" }
+      {
+        "year": "2026",
+        "text": "ポートフォリオサイト公開"
+      }
     ],
-    "skills": ["Design", "Photography", "Web"]
+    "skills": [
+      "Design",
+      "Photography",
+      "Web"
+    ]
   }
 }

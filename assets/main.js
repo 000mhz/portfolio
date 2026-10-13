@@ -37,6 +37,7 @@ async function renderTop() {
   document.title = site.name;
   $("#logo").textContent = site.name;
   $("#mv-img").src = src(site.mv);
+  if (site.mvText === "dark") $(".t-mv").classList.add("mv-dark");
   $("#mv-name").textContent = site.name;
   $("#mv-sub").textContent = site.location || "";
   $("#role").textContent = site.role;
