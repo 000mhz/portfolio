@@ -1,29 +1,33 @@
 {
+  "siteName": "000mhz",
   "name": "Your Name",
   "role": "Designer / Photographer",
   "tagline": "ここにひとことキャッチコピー",
   "location": "Tokyo, Japan",
   "mv": "images/mv.svg",
-  "mvText": "dark",
   "sns": [
     {
       "label": "Instagram",
-      "url": "https://www.instagram.com/"
+      "url": "https://www.instagram.com/",
+      "handle": "@yourname"
     },
     {
       "label": "X",
-      "url": "https://x.com/"
+      "url": "https://x.com/",
+      "handle": "@yourname"
     },
     {
       "label": "Mail",
-      "url": "mailto:hello@example.com"
+      "url": "mailto:hello@example.com",
+      "handle": "hello@example.com"
     }
   ],
   "instagram": {
     "profileUrl": "https://www.instagram.com/",
     "feedUrl": "",
     "count": 4,
-    "manual": []
+    "manual": [],
+    "handle": "@yourname"
   },
   "profile": {
     "photo": "images/profile.jpg",

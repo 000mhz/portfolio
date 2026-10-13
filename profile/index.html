@@ -4,35 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body data-page="profile" data-root="../">
-  <div class="wrap">
-    <header class="site-header">
-      <a href="../" class="logo" id="logo">Portfolio</a>
-      <nav class="nav">
-        <a href="../">Top</a>
-        <a href="./" aria-current="page">Profile</a>
-        <a href="../works/">Works</a>
-      </nav>
-    </header>
-
-    <h1 class="page-title">Profile</h1>
-
-    <section class="panel profile-top">
-      <img id="p-photo" alt="">
-      <div>
-        <h2 style="margin:0;color:var(--ink);font-size:28px;letter-spacing:0;text-transform:none;font-weight:600" id="p-name"></h2>
-        <p style="color:var(--muted)" id="p-role"></p>
-      </div>
-    </section>
-
-    <section class="panel"><h2>About</h2><div id="p-bio"></div></section>
-    <section class="panel"><h2>History</h2><ul class="history" id="p-history"></ul></section>
-    <section class="panel"><h2>Skills</h2><div class="chips" id="p-skills"></div></section>
-    <section class="panel"><h2>Contact</h2><div class="chips" id="p-sns"></div></section>
-
-    <footer class="site-footer">© <span id="year"></span></footer>
+  <div class="layout">
+    <aside class="side" id="side"></aside>
+    <main id="main"></main>
   </div>
   <script src="../assets/main.js"></script>
 </body>

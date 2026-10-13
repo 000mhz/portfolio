@@ -3,33 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
   <title>Members</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- ログイン必須ページ。Cloudflare Access で /members/* を保護する前提。保護前は公開状態なので非公開の内容は置かないこと。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body data-page="members" data-root="../">
-  <!--
-    ログイン必須ページ。
-    このページは Cloudflare Access で /members/* を保護する前提です。
-    保護設定が済むまでは誰でも見られるので、非公開の内容はまだ置かないでください。
-  -->
-  <div class="wrap">
-    <header class="site-header">
-      <a href="../" class="logo" id="logo">Portfolio</a>
-      <nav class="nav">
-        <a href="../">Top</a>
-        <a href="../profile/">Profile</a>
-        <a href="../works/">Works</a>
-      </nav>
-    </header>
-
-    <h1 class="page-title">Members</h1>
-    <section class="panel">
-      <h2>Private</h2>
-      <p>ログインした人だけが見られるページです。</p>
-    </section>
-
-    <footer class="site-footer">© <span id="year"></span></footer>
+  <div class="layout">
+    <aside class="side" id="side"></aside>
+    <main id="main">
+      <p class="page-head">Members</p>
+      <section class="panel"><h2>Private</h2><p>ログインした人だけが見られるページです。</p></section>
+    </main>
   </div>
   <script src="../assets/main.js"></script>
 </body>
