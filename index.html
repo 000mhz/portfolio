@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="top" data-root="./">
+  <div class="wrap">
+    <header class="site-header">
+      <a href="./" class="logo" id="logo">Portfolio</a>
+      <nav class="nav">
+        <a href="./" aria-current="page">Top</a>
+        <a href="profile/">Profile</a>
+        <a href="works/">Works</a>
+      </nav>
+    </header>
+
+    <main class="bento">
+      <section class="tile t-mv">
+        <img id="mv-img" alt="">
+        <div class="mv-caption">
+          <h1 id="mv-name"></h1>
+          <p id="mv-sub"></p>
+        </div>
+      </section>
+
+      <section class="tile t-intro">
+        <span class="role" id="role"></span>
+        <p class="tagline" id="tagline"></p>
+      </section>
+
+      <div class="sns-group" id="sns-slot"></div>
+
+      <section class="tile t-insta">
+        <div class="insta-head">
+          <strong>Instagram</strong>
+          <a id="insta-link" target="_blank" rel="noopener"><span>View all ↗</span></a>
+        </div>
+        <div class="insta-grid" id="insta-grid"></div>
+      </section>
+
+      <a class="tile t-link" href="profile/">
+        <span class="arrow">→</span>
+        <h2>Profile</h2>
+        <p>About me</p>
+      </a>
+      <a class="tile t-link" href="works/">
+        <span class="arrow">→</span>
+        <h2>Works</h2>
+        <p>Selected projects</p>
+      </a>
+    </main>
+
+    <footer class="site-footer">© <span id="year"></span></footer>
+  </div>
+  <script src="assets/main.js"></script>
+</body>
+</html>

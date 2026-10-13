@@ -1,0 +1,29 @@
+{
+  "name": "Your Name",
+  "role": "Designer / Photographer",
+  "tagline": "ここにひとことキャッチコピー",
+  "location": "Tokyo, Japan",
+  "mv": "images/mv.svg",
+  "sns": [
+    { "label": "Instagram", "url": "https://www.instagram.com/" },
+    { "label": "X", "url": "https://x.com/" },
+    { "label": "Mail", "url": "mailto:hello@example.com" }
+  ],
+  "instagram": {
+    "profileUrl": "https://www.instagram.com/",
+    "feedUrl": "",
+    "count": 4,
+    "manual": []
+  },
+  "profile": {
+    "photo": "",
+    "bio": [
+      "ここに自己紹介文を書きます。",
+      "段落ごとに分けて書けます。"
+    ],
+    "history": [
+      { "year": "2026", "text": "ポートフォリオサイト公開" }
+    ],
+    "skills": ["Design", "Photography", "Web"]
+  }
+}
