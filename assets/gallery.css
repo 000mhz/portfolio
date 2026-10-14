@@ -1,0 +1,141 @@
+/* soblue gallery: full-screen photos.
+   Landscape photos fill the screen; portrait photos sit centred.
+   The UI is ink on the white ground, and switches to white (with a soft shadow) over a full-screen photo. */
+
+html, body.gallery { height: 100%; overflow: hidden; }
+body.gallery { background: var(--bg); overscroll-behavior: none; }
+
+.g-stage { position: fixed; inset: 0; touch-action: pan-y; }
+.g-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.g-slide.is-active { opacity: 1; }
+.g-slide img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* portrait: centred with breathing room above the header and below the bar */
+.g-slide img { top: 72px; height: calc(100% - 152px); }
+/* landscape: fill the whole screen */
+.g-slide.is-landscape img { top: 0; height: 100%; object-fit: cover; }
+/* on a tall phone screen, filling would crop most of a landscape photo, so centre it instead */
+@media (orientation: portrait) {
+  .g-slide.is-landscape img { top: 72px; height: calc(100% - 152px); object-fit: contain; }
+}
+
+/* ---------- UI layer ---------- */
+.g-ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  color: var(--ink);
+  --seg-track: rgba(0, 0, 0, .14);
+  --seg-fill: var(--ink);
+  transition: color .4s ease;
+}
+body.ui-light .g-ui {
+  color: #fff;
+  --seg-track: rgba(255, 255, 255, .35);
+  --seg-fill: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .25);
+}
+body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
+.g-ui a, .g-ui button { pointer-events: auto; }
+
+.g-top {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 24px);
+  left: 32px;
+  right: 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 15px;
+}
+.g-back { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.g-title { font-style: italic; }
+.g-count { margin-left: auto; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+
+.g-nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 64px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  opacity: .85;
+  transition: opacity .2s;
+}
+.g-nav:hover { opacity: 1; }
+.g-nav svg { width: 30px; height: 30px; }
+.g-prev { left: 12px; }
+.g-next { right: 12px; }
+.g-nav:focus-visible { outline: 1px solid currentColor; outline-offset: -8px; border-radius: 4px; }
+
+.g-caption {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 44px);
+  font-size: 14px;
+  font-style: italic;
+  min-height: 1em;
+}
+
+/* stories-style seek bar */
+.g-bar {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  display: flex;
+  gap: 4px;
+}
+.g-seg {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.g-seg span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--seg-track);
+  overflow: hidden;
+}
+.g-seg i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--seg-fill);
+}
+.g-seg.is-done i { width: 100%; }
+.g-seg:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .g-top { left: 16px; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 18px); }
+  .g-caption, .g-bar { left: 16px; right: 16px; }
+  .g-nav { width: 48px; }
+  .g-prev { left: 0; }
+  .g-next { right: 0; }
+  .g-nav svg { width: 24px; height: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-slide { transition: none; }
+}
