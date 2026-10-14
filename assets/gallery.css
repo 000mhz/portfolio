@@ -131,6 +131,7 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 @media (max-width: 640px) {
   .g-top { left: 16px; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 18px); }
   .g-caption, .g-bar { left: 16px; right: 16px; }
+  .g-bar { gap: 2px; }
   .g-nav { width: 48px; }
   .g-prev { left: 0; }
   .g-next { right: 0; }
