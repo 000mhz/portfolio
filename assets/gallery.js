@@ -3,8 +3,7 @@
 (() => {
   const ROOT = document.body.dataset.root || "./";
   const INDEX_LINKS = document.body.dataset.indexlinks === "1"; // プレビュー環境用
-  const DURATION = 5000; // 1枚あたりの表示時間（ミリ秒）
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DURATION = 4000; // 1枚あたりの表示時間（ミリ秒）
 
   const $ = (id) => document.getElementById(id);
   const stage = $("g-stage");
@@ -18,7 +17,7 @@
   let index = 0;
   let elapsed = 0;
   let last = 0;
-  let paused = reduceMotion;
+  let paused = false;
   const wideScreen = matchMedia("(orientation: landscape)");
 
   // 全画面表示の写真の上ではUIを白に
@@ -95,14 +94,14 @@
 
     // ストーリーズ風：押している間は一時停止、横スワイプでページ送り
     let startX = null;
-    stage.addEventListener("pointerdown", (e) => { startX = e.clientX; if (!reduceMotion) paused = true; });
+    stage.addEventListener("pointerdown", (e) => { startX = e.clientX; paused = true; });
     const end = (e) => {
       if (startX !== null) {
         const dx = e.clientX - startX;
         if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
       }
       startX = null;
-      if (!reduceMotion) paused = false;
+      paused = false;
     };
     stage.addEventListener("pointerup", end);
     stage.addEventListener("pointercancel", end);
