@@ -30,7 +30,7 @@
     "handle": "@yourname"
   },
   "profile": {
-    "photo": "images/profile.jpg",
+    "photo": "",
     "bio": [
       "ここに自己紹介文を書きます。",
       "段落ごとに分けて書けます。"
