@@ -27,7 +27,7 @@ function renderSide(site, current) {
     ["Top", "", "top"],
     ["Profile", "profile", "profile"],
     ["Works", "works", "works"],
-    ["soblue", "soblue", "soblue"],
+    ["So Blue", "soblue", "soblue"],
   ]
     .map(([label, dir, key]) =>
       `<a href="${pageUrl(dir)}"${key === current ? ' aria-current="page"' : ""}>${label}</a>`)
