@@ -56,12 +56,17 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
   left: 32px;
   right: 32px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   font-size: 15px;
 }
 .g-back { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
-.g-title { font-style: italic; }
+.g-title {
+  font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .08em;
+}
 .g-count { margin-left: auto; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 
 .g-nav {
