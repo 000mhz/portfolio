@@ -34,7 +34,10 @@ function renderSide(site, current) {
     .join("");
   const p = site.profile || {};
   $("#side").innerHTML = `
-    <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
+    <div class="side-head">
+      <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
+      <nav class="side-nav" aria-label="Pages">${nav}</nav>
+    </div>
     ${p.photo ? `<img class="avatar" src="${esc(src(p.photo))}" alt="${esc(site.name)}">` : `<span class="avatar avatar-empty" aria-hidden="true">${ICONS.image}</span>`}
     <div>
       <h1>${esc(site.name)}</h1>
@@ -42,7 +45,6 @@ function renderSide(site, current) {
     </div>
     ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
     ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
-    <nav aria-label="Pages">${nav}</nav>
     <p class="site-footer">© ${new Date().getFullYear()} ${esc(site.siteName || site.name)}</p>`;
 }
 

@@ -78,17 +78,17 @@ img { display: block; max-width: 100%; }
 .side .role { color: var(--sub); font-size: 16px; font-style: italic; margin-top: 6px; }
 .side .tagline { font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 32ch; }
 .side .loc { font-size: 14px; color: var(--muted); }
-.side nav { display: flex; gap: 8px; flex-wrap: wrap; }
-.side nav a {
-  font-size: 15px;
-  padding: 5px 16px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+/* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
+.side-head { display: contents; }
+.side-nav { order: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.side .site-footer { order: 2; }
+.side-nav a {
+  font-size: 16px;
   color: var(--sub);
-  transition: background .2s, color .2s;
+  transition: color .2s;
 }
-.side nav a:hover { color: var(--ink); background: var(--soft); }
-.side nav a[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.side-nav a:hover { color: var(--ink); }
+.side-nav a[aria-current="page"] { color: var(--ink); font-weight: 600; }
 
 /* ---------- right: bento grid ---------- */
 #main { container-type: inline-size; min-width: 0; }
@@ -217,6 +217,9 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 @media (max-width: 960px) {
   .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 40px 20px 64px; }
   .side { position: static; gap: 18px; }
+  .side-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+  .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 16px; }
+  .side-nav a { font-size: 15px; }
   .side .avatar { width: 112px; height: 112px; }
 }
 @media (max-width: 640px) {
