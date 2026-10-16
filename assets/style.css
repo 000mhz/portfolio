@@ -15,6 +15,7 @@
   --radius-inner: 4px;
   --gap: 24px;
   --font: "Ibarra Real Nova", "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-gothic: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
   color-scheme: light;
 }
 
@@ -83,12 +84,16 @@ img { display: block; max-width: 100%; }
 .side-nav { order: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
 .side .site-footer { order: 2; }
 .side-nav a {
-  font-size: 16px;
-  color: var(--sub);
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .08em;
+  line-height: 2;
+  color: var(--muted);
   transition: color .2s;
 }
 .side-nav a:hover { color: var(--ink); }
-.side-nav a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.side-nav a[aria-current="page"] { color: var(--ink); }
 
 /* ---------- right: bento grid ---------- */
 #main { container-type: inline-size; min-width: 0; }
@@ -219,7 +224,7 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .side { position: static; gap: 18px; }
   .side-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
   .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 16px; }
-  .side-nav a { font-size: 15px; }
+  .side-nav a { font-size: 13px; }
   .side .avatar { width: 112px; height: 112px; }
 }
 @media (max-width: 640px) {

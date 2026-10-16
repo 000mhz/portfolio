@@ -62,7 +62,7 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 }
 .g-back { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
 .g-title {
-  font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-family: var(--font-gothic);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: .08em;
