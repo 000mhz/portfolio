@@ -67,6 +67,10 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
   font-size: 13px;
   letter-spacing: .08em;
 }
+.g-crumb { display: flex; align-items: center; gap: 8px; }
+.g-up { opacity: .55; transition: opacity .2s; }
+.g-up:hover { opacity: 1; }
+.g-sep { opacity: .35; font-size: 13px; }
 .g-count { margin-left: auto; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 
 .g-nav {

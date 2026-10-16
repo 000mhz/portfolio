@@ -9,7 +9,10 @@
   const stage = $("g-stage");
   const bar = $("g-bar");
   const src = (p) => (/^(https?:)?\/\//.test(p) ? p : ROOT + p);
-  if (INDEX_LINKS) $("g-back").href = ROOT + "index.html";
+  if (INDEX_LINKS) {
+    $("g-back").href = ROOT + "index.html";
+    $("g-up").href = ROOT + "works/index.html";
+  }
 
   let photos = [];
   let slides = [];

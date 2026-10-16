@@ -27,7 +27,6 @@ function renderSide(site, current) {
     ["Top", "", "top"],
     ["Profile", "profile", "profile"],
     ["Works", "works", "works"],
-    ["So Blue", "soblue", "soblue"],
   ]
     .map(([label, dir, key]) =>
       `<a href="${pageUrl(dir)}"${key === current ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -148,11 +147,14 @@ async function renderWorks() {
     <div class="works-grid">${works
       .map((w) => {
         const inner = `<img src="${esc(src(w.image))}" alt="${esc(w.title)}" loading="lazy">
-          <div class="body"><div class="meta">${esc(w.year)} · ${esc(w.category)}</div>
+          <div class="body"><div class="meta">${[w.year, w.category].filter(Boolean).map(esc).join(" · ")}</div>
           <h3>${esc(w.title)}</h3><p>${esc(w.description)}</p></div>`;
-        return w.url
-          ? `<a class="work" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a>`
-          : `<article class="work">${inner}</article>`;
+        if (!w.url) return `<article class="work">${inner}</article>`;
+        if (/^https?:\/\//.test(w.url))
+          return `<a class="work" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a>`;
+        // サイト内のページ（例: works/soblue/）
+        const href = ROOT + w.url + (INDEX_LINKS && w.url.endsWith("/") ? "index.html" : "");
+        return `<a class="work" href="${esc(href)}">${inner}</a>`;
       })
       .join("")}</div>`;
 }
