@@ -140,23 +140,74 @@ async function renderProfile(site) {
     </div>`;
 }
 
-async function renderWorks() {
+async function renderWorks(site) {
   const works = await getJSON("data/works.json");
+  const cats = site.workCategories || [...new Set(works.map((w) => w.category).filter(Boolean))];
+  const slug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+  const card = (w, i) => {
+    const inner = `<img src="${esc(src(w.image))}" alt="${esc(w.title)}" loading="lazy">
+      <div class="body"><div class="meta">${[w.year, w.category].filter(Boolean).map(esc).join(" · ")}</div>
+      <h3>${esc(w.title)}</h3>${w.description ? `<p>${esc(w.description)}</p>` : ""}</div>`;
+    if (/^https?:\/\//.test(w.url || ""))
+      return `<a class="work" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a>`;
+    if (w.url) {
+      // サイト内のページ（例: works/soblue/）
+      const href = ROOT + w.url + (INDEX_LINKS && w.url.endsWith("/") ? "index.html" : "");
+      return `<a class="work" href="${esc(href)}">${inner}</a>`;
+    }
+    // リンク先がない作品は、クリックで画像を大きく表示
+    return `<button class="work work-zoom" type="button" data-i="${i}">${inner}</button>`;
+  };
+
   $("#main").innerHTML = `
     <p class="page-head">Works</p>
-    <div class="works-grid">${works
-      .map((w) => {
-        const inner = `<img src="${esc(src(w.image))}" alt="${esc(w.title)}" loading="lazy">
-          <div class="body"><div class="meta">${[w.year, w.category].filter(Boolean).map(esc).join(" · ")}</div>
-          <h3>${esc(w.title)}</h3><p>${esc(w.description)}</p></div>`;
-        if (!w.url) return `<article class="work">${inner}</article>`;
-        if (/^https?:\/\//.test(w.url))
-          return `<a class="work" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a>`;
-        // サイト内のページ（例: works/soblue/）
-        const href = ROOT + w.url + (INDEX_LINKS && w.url.endsWith("/") ? "index.html" : "");
-        return `<a class="work" href="${esc(href)}">${inner}</a>`;
-      })
-      .join("")}</div>`;
+    <nav class="w-tabs" aria-label="Categories">
+      <button type="button" data-cat="all">All</button>
+      ${cats.map((c) => `<button type="button" data-cat="${slug(c)}">${esc(c)}</button>`).join("")}
+    </nav>
+    <div class="works-grid" id="works-grid"></div>
+    <p class="w-empty" id="w-empty" hidden>Coming soon.</p>
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" type="button" aria-label="閉じる">×</button>
+      <img alt="">
+      <p class="lb-cap"></p>
+    </div>`;
+
+  const grid = $("#works-grid");
+  const show = (key) => {
+    if (key !== "all" && !cats.some((c) => slug(c) === key)) key = "all";
+    const list = works.map((w, i) => [w, i]).filter(([w]) => key === "all" || slug(w.category || "") === key);
+    grid.innerHTML = list.map(([w, i]) => card(w, i)).join("");
+    $("#w-empty").hidden = list.length > 0;
+    document.querySelectorAll(".w-tabs button").forEach((b) =>
+      b.setAttribute("aria-current", b.dataset.cat === key ? "true" : "false"));
+  };
+  document.querySelector(".w-tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    show(b.dataset.cat);
+    try { history.replaceState(null, "", b.dataset.cat === "all" ? location.pathname : "#" + b.dataset.cat); } catch (_) {}
+  });
+  show((location.hash || "#all").slice(1));
+  addEventListener("hashchange", () => show((location.hash || "#all").slice(1)));
+
+  // lightbox
+  const lb = $("#lightbox");
+  const close = () => { lb.hidden = true; document.body.style.overflow = ""; };
+  grid.addEventListener("click", (e) => {
+    const b = e.target.closest(".work-zoom");
+    if (!b) return;
+    const w = works[+b.dataset.i];
+    lb.querySelector("img").src = src(w.image);
+    lb.querySelector("img").alt = w.title;
+    lb.querySelector(".lb-cap").textContent = w.title;
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lb.querySelector(".lb-close").focus();
+  });
+  lb.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) close(); });
 }
 
 (async () => {

@@ -46,5 +46,11 @@
       "Photography",
       "Web"
     ]
-  }
+  },
+  "workCategories": [
+    "Photography",
+    "Illustration",
+    "Font",
+    "Graphic Design"
+  ]
 }

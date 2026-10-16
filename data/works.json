@@ -8,27 +8,19 @@
     "url": "works/soblue/"
   },
   {
-    "title": "Sample Work 01",
-    "year": "2026",
-    "category": "Design",
-    "image": "images/work-placeholder.svg",
-    "description": "作品の説明をここに書きます。",
+    "title": "Illustration 01",
+    "year": "",
+    "category": "Illustration",
+    "image": "images/illustration/illust-01.webp",
+    "description": "",
     "url": ""
   },
   {
-    "title": "Sample Work 02",
-    "year": "2026",
-    "category": "Photography",
-    "image": "images/work-placeholder.svg",
-    "description": "作品の説明をここに書きます。",
-    "url": ""
-  },
-  {
-    "title": "Sample Work 03",
-    "year": "2025",
-    "category": "Web",
-    "image": "images/work-placeholder.svg",
-    "description": "作品の説明をここに書きます。",
+    "title": "Illustration 02",
+    "year": "",
+    "category": "Illustration",
+    "image": "images/illustration/illust-02.webp",
+    "description": "",
     "url": ""
   }
 ]
