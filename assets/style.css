@@ -198,8 +198,8 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 }
 .w-tabs button:hover, .w-tabs button[aria-current="true"] { color: var(--ink); }
 /* works list: year · title · category */
-.w-list { list-style: none; border-top: 1px solid var(--line); }
-.w-list li { border-bottom: 1px solid var(--line); }
+.w-list { list-style: none; border-top: 2px solid #000; }
+.w-list li { border-bottom: 1px solid #000; }
 .w-row {
   display: grid;
   grid-template-columns: 64px minmax(0, 1fr) auto;
