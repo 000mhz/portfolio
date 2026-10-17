@@ -220,7 +220,7 @@ a.w-row:hover, button.w-row:hover { padding-left: 12px; }
 .w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
 .w-year { font-size: 15px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
-.w-cat { font-size: 15px; font-style: italic; text-align: right; }
+.w-cat { font-size: 13px; font-style: italic; text-align: right; }
 .w-empty { color: var(--muted); font-style: italic; padding: 40px 0; }
 .lightbox {
   position: fixed;
@@ -311,7 +311,8 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
   .w-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 16px 2px; }
   .w-title { font-size: 19px; }
-  .w-year, .w-cat { font-size: 14px; }
+  .w-year { font-size: 14px; }
+  .w-cat { font-size: 12px; }
   .panel { padding: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {

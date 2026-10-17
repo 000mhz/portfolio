@@ -22,5 +22,29 @@
     "image": "images/illustration/illust-02.webp",
     "description": "",
     "url": ""
+  },
+  {
+    "title": "Cumulus",
+    "year": "2025",
+    "category": "Illustration",
+    "image": "images/illustration/illust-03.webp",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Night Grid",
+    "year": "2025",
+    "category": "Illustration",
+    "image": "images/illustration/illust-04.webp",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Lava Flow",
+    "year": "2025",
+    "category": "Illustration",
+    "image": "images/illustration/illust-05.webp",
+    "description": "",
+    "url": ""
   }
 ]
