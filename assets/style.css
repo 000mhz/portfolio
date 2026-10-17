@@ -217,24 +217,10 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 a.w-row, button.w-row { cursor: pointer; }
 button.w-row { cursor: zoom-in; }
 a.w-row:hover, button.w-row:hover { padding-left: 12px; }
-.w-year {
-  font-family: var(--font-gothic);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: .08em;
-  font-variant-numeric: tabular-nums;
-  color: var(--muted);
-}
+.w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
+.w-year { font-size: 15px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
-.w-cat {
-  font-family: var(--font-gothic);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: .08em;
-  color: var(--muted);
-  text-align: right;
-}
-a.w-row:hover .w-cat, button.w-row:hover .w-cat { color: var(--ink); }
+.w-cat { font-size: 15px; font-style: italic; text-align: right; }
 .w-empty { color: var(--muted); font-style: italic; padding: 40px 0; }
 .lightbox {
   position: fixed;
@@ -325,7 +311,7 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
   .w-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 16px 2px; }
   .w-title { font-size: 19px; }
-  .w-year, .w-cat { font-size: 12px; }
+  .w-year, .w-cat { font-size: 14px; }
   .panel { padding: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
