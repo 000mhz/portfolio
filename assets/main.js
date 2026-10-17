@@ -145,19 +145,20 @@ async function renderWorks(site) {
   const cats = site.workCategories || [...new Set(works.map((w) => w.category).filter(Boolean))];
   const slug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-  const card = (w, i) => {
-    const inner = `<img src="${esc(src(w.image))}" alt="${esc(w.title)}" loading="lazy">
-      <div class="body"><div class="meta">${[w.year, w.category].filter(Boolean).map(esc).join(" · ")}</div>
-      <h3>${esc(w.title)}</h3>${w.description ? `<p>${esc(w.description)}</p>` : ""}</div>`;
+  const row = (w, i) => {
+    const inner = `<span class="w-year">${esc(w.year || "")}</span>
+      <span class="w-title">${esc(w.title)}</span>
+      <span class="w-cat">${esc(w.category || "")}</span>`;
     if (/^https?:\/\//.test(w.url || ""))
-      return `<a class="work" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a>`;
+      return `<li><a class="w-row" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a></li>`;
     if (w.url) {
       // サイト内のページ（例: works/soblue/）
       const href = ROOT + w.url + (INDEX_LINKS && w.url.endsWith("/") ? "index.html" : "");
-      return `<a class="work" href="${esc(href)}">${inner}</a>`;
+      return `<li><a class="w-row" href="${esc(href)}">${inner}</a></li>`;
     }
     // リンク先がない作品は、クリックで画像を大きく表示
-    return `<button class="work work-zoom" type="button" data-i="${i}">${inner}</button>`;
+    if (w.image) return `<li><button class="w-row work-zoom" type="button" data-i="${i}">${inner}</button></li>`;
+    return `<li><span class="w-row">${inner}</span></li>`;
   };
 
   $("#main").innerHTML = `
@@ -166,7 +167,7 @@ async function renderWorks(site) {
       <button type="button" data-cat="all">All</button>
       ${cats.map((c) => `<button type="button" data-cat="${slug(c)}">${esc(c)}</button>`).join("")}
     </nav>
-    <div class="works-grid" id="works-grid"></div>
+    <ul class="w-list" id="works-grid"></ul>
     <p class="w-empty" id="w-empty" hidden>Coming soon.</p>
     <div class="lightbox" id="lightbox" hidden>
       <button class="lb-close" type="button" aria-label="閉じる">×</button>
@@ -178,7 +179,7 @@ async function renderWorks(site) {
   const show = (key) => {
     if (key !== "all" && !cats.some((c) => slug(c) === key)) key = "all";
     const list = works.map((w, i) => [w, i]).filter(([w]) => key === "all" || slug(w.category || "") === key);
-    grid.innerHTML = list.map(([w, i]) => card(w, i)).join("");
+    grid.innerHTML = list.map(([w, i]) => row(w, i)).join("");
     $("#w-empty").hidden = list.length > 0;
     document.querySelectorAll(".w-tabs button").forEach((b) =>
       b.setAttribute("aria-current", b.dataset.cat === key ? "true" : "false"));

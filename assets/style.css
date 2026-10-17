@@ -197,9 +197,45 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   transition: color .2s;
 }
 .w-tabs button:hover, .w-tabs button[aria-current="true"] { color: var(--ink); }
+/* works list: year · title · category */
+.w-list { list-style: none; border-top: 1px solid var(--line); }
+.w-list li { border-bottom: 1px solid var(--line); }
+.w-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 4px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  transition: padding .25s ease, color .2s;
+}
+a.w-row, button.w-row { cursor: pointer; }
+button.w-row { cursor: zoom-in; }
+a.w-row:hover, button.w-row:hover { padding-left: 12px; }
+.w-year {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
+.w-cat {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .08em;
+  color: var(--muted);
+  text-align: right;
+}
+a.w-row:hover .w-cat, button.w-row:hover .w-cat { color: var(--ink); }
 .w-empty { color: var(--muted); font-style: italic; padding: 40px 0; }
-button.work { display: block; width: 100%; padding: 0; text-align: left; font: inherit; color: inherit; cursor: zoom-in; }
-button.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .lightbox {
   position: fixed;
   inset: 0;
@@ -287,6 +323,9 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .t-works .text .arrow { position: absolute; top: 18px; right: 18px; }
   .t-works .thumbs { display: none; }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
+  .w-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 16px 2px; }
+  .w-title { font-size: 19px; }
+  .w-year, .w-cat { font-size: 12px; }
   .panel { padding: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
