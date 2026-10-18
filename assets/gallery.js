@@ -77,7 +77,7 @@
     if (!photos.length) return;
 
     stage.innerHTML = photos
-      .map((p, i) => `<figure class="g-slide"><img alt="So Blue ${i + 1}" draggable="false"></figure>`)
+      .map((p, i) => `<figure class="g-slide"><img alt="So Blue YOKOHAMA STADIUM 2025 ${i + 1}" draggable="false"></figure>`)
       .join("");
     slides = [...stage.children];
 

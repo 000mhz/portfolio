@@ -251,7 +251,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 a.w-row, button.w-row { cursor: pointer; }
 button.w-row { cursor: zoom-in; }
 .w-row { transition: background-color .2s ease; }
-a.w-row:hover, button.w-row:hover, a.w-row:focus-visible, button.w-row:focus-visible { background: var(--soft); }
+a.w-row:hover, button.w-row:hover, a.w-row:focus-visible, button.w-row:focus-visible { background: #fafafa; }
 .w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
 .w-year { font-size: 13px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }

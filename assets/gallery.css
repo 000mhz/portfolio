@@ -71,7 +71,9 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 .g-up { opacity: .55; transition: opacity .2s; }
 .g-up:hover { opacity: 1; }
 .g-sep { opacity: .35; font-size: 13px; }
-.g-count { margin-left: auto; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.g-crumb { min-width: 0; white-space: nowrap; }
+.g-crumb > .g-title:last-child { overflow: hidden; text-overflow: ellipsis; }
+.g-count { margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 .g-close { display: grid; place-items: center; width: 32px; height: 32px; margin: -8px -8px -8px 4px; opacity: .85; transition: opacity .2s; }
 .g-close:hover { opacity: 1; }
 .g-close svg { width: 20px; height: 20px; }
@@ -142,7 +144,9 @@ body.ui-light .g-close svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 .g-seg:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
 
 @media (max-width: 640px) {
-  .g-top { left: 16px; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 18px); }
+  .g-top { left: 16px; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 18px); gap: 12px; }
+  /* phones: the long title takes the place of the site name and the Studies crumb; × goes back */
+  .g-back, .g-up, .g-sep { display: none; }
   .g-caption, .g-bar { left: 16px; right: 16px; }
   .g-bar { gap: 2px; }
   .g-nav { width: 48px; }
