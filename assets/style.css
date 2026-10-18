@@ -303,6 +303,8 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 /* ---------- Profile / Studies: same frame as Top, left column left empty ---------- */
 .page-footer { grid-column: 2; }
 .page-footer .site-footer { padding-top: 0; }
+@media (min-width: 961px) { .top-footer { display: none; } }
+@media (max-width: 960px) { .side .site-footer { display: none; } }
 
 /* ---------- PC: Top page fits in one screen ---------- */
 @media (min-width: 961px) and (min-height: 620px) {

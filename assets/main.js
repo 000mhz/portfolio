@@ -60,6 +60,8 @@ function renderSide(site, current) {
     ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
     ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
     ${footer}`;
+  // スマホでは左カラムが上に来るので、コピーライトはページ最下部にも置いて切り替える
+  $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer top-footer">${footer}</footer>`);
 }
 
 async function loadInstagram(cfg) {
