@@ -251,6 +251,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 a.w-row, button.w-row { cursor: pointer; }
 button.w-row { cursor: zoom-in; }
 .w-row { transition: background-color .2s ease; }
+.w-sub { margin-left: .5em; font-size: 13px; letter-spacing: .08em; }
 a.w-row:hover, button.w-row:hover, a.w-row:focus-visible, button.w-row:focus-visible { background: #fafafa; }
 .w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
 .w-year { font-size: 13px; font-variant-numeric: tabular-nums lining-nums; }
@@ -353,6 +354,7 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .w-list { --w-cols: 40px minmax(0, 1fr) 84px; }
   .w-row { row-gap: 16px; padding-top: 16px; }
   .w-title { font-size: 19px; }
+  .w-sub { display: block; margin: 2px 0 0; font-size: 11px; }
   .w-year, .w-cat { font-size: 12px; }
   .panel { padding: 24px; }
   .p-likes { grid-template-columns: minmax(0, 1fr); row-gap: 0; }

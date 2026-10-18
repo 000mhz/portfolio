@@ -171,7 +171,7 @@ async function renderWorks(site) {
 
   const row = (w, i) => {
     const inner = `<span class="w-year">${esc(w.year || "")}</span>
-      <span class="w-title">${esc(w.title)}</span>
+      <span class="w-title">${esc(w.title)}${w.subtitle ? ` <small class="w-sub">${esc(w.subtitle)}</small>` : ""}</span>
       <span class="w-cat">${esc(w.category || "")}</span>
       <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>`;
     if (/^https?:\/\//.test(w.url || ""))

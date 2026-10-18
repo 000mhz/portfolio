@@ -71,6 +71,7 @@ body.ui-light .g-nav svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 .g-up { opacity: .55; transition: opacity .2s; }
 .g-up:hover { opacity: 1; }
 .g-sep { opacity: .35; font-size: 13px; }
+.g-sub { margin-left: .4em; font-family: var(--font); font-weight: 400; font-size: 12px; letter-spacing: .08em; opacity: .7; }
 .g-crumb { min-width: 0; white-space: nowrap; }
 .g-crumb > .g-title:last-child { overflow: hidden; text-overflow: ellipsis; }
 .g-count { margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: .06em; }

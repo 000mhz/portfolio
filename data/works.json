@@ -1,6 +1,7 @@
 [
   {
-    "title": "So Blue YOKOHAMA STADIUM 2025",
+    "title": "So Blue",
+    "subtitle": "YOKOHAMA STADIUM 2025",
     "year": "2025",
     "category": "Photography",
     "image": "images/soblue/soblue-02.webp",
@@ -9,7 +10,7 @@
   },
   {
     "title": "Shallows",
-    "year": "2025",
+    "year": "2022",
     "category": "Illustration",
     "image": "images/illustration/illust-01.webp",
     "description": "",
@@ -17,7 +18,7 @@
   },
   {
     "title": "Alpine Ridge",
-    "year": "2025",
+    "year": "2022",
     "category": "Illustration",
     "image": "images/illustration/illust-02.webp",
     "description": "",
@@ -25,7 +26,7 @@
   },
   {
     "title": "Cumulus",
-    "year": "2025",
+    "year": "2022",
     "category": "Illustration",
     "image": "images/illustration/illust-03.webp",
     "description": "",
@@ -33,7 +34,7 @@
   },
   {
     "title": "Night Grid",
-    "year": "2025",
+    "year": "2022",
     "category": "Illustration",
     "image": "images/illustration/illust-04.webp",
     "description": "",
@@ -41,7 +42,7 @@
   },
   {
     "title": "Lava Flow",
-    "year": "2025",
+    "year": "2022",
     "category": "Illustration",
     "image": "images/illustration/illust-05.webp",
     "description": "",
