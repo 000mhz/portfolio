@@ -198,25 +198,32 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 }
 .w-tabs button:hover, .w-tabs button[aria-current="true"] { color: var(--ink); }
 /* works list: year · title · category */
-.w-list { list-style: none; border-top: 2px solid #000; }
-.w-list li { border-bottom: 1px solid #000; }
-.w-row {
+/* rules are drawn per cell, with an 8px gap between columns */
+.w-list { list-style: none; --w-cols: 64px minmax(0, 1fr) 140px; }
+.w-rules, .w-row {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) auto;
+  grid-template-columns: var(--w-cols);
+  column-gap: 8px;
+}
+.w-rules i { display: block; height: 2px; background: #000; }
+.w-row {
+  grid-template-rows: auto 1px;
+  row-gap: 18px;
   align-items: baseline;
-  gap: 16px;
   width: 100%;
-  padding: 18px 4px;
+  padding: 18px 0 0;
   background: none;
   border: 0;
   font: inherit;
   color: inherit;
   text-align: left;
-  transition: padding .25s ease, color .2s;
 }
+.w-row > span { grid-row: 1; }
+.w-row > i { grid-row: 2; align-self: stretch; height: 1px; background: #000; }
 a.w-row, button.w-row { cursor: pointer; }
 button.w-row { cursor: zoom-in; }
-a.w-row:hover, button.w-row:hover { padding-left: 12px; }
+.w-title { transition: padding .25s ease; }
+a.w-row:hover .w-title, button.w-row:hover .w-title { padding-left: 10px; }
 .w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
 .w-year { font-size: 13px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
@@ -326,7 +333,8 @@ body:not([data-page="top"]) .side-nav { flex-direction: row; flex-wrap: wrap; ju
   .t-works .text .arrow { position: absolute; top: 18px; right: 18px; }
   .t-works .thumbs { display: none; }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
-  .w-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 16px 2px; }
+  .w-list { --w-cols: 40px minmax(0, 1fr) 84px; }
+  .w-row { row-gap: 16px; padding-top: 16px; }
   .w-title { font-size: 19px; }
   .w-year, .w-cat { font-size: 12px; }
   .panel { padding: 24px; }

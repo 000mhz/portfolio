@@ -159,7 +159,8 @@ async function renderWorks(site) {
   const row = (w, i) => {
     const inner = `<span class="w-year">${esc(w.year || "")}</span>
       <span class="w-title">${esc(w.title)}</span>
-      <span class="w-cat">${esc(w.category || "")}</span>`;
+      <span class="w-cat">${esc(w.category || "")}</span>
+      <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>`;
     if (/^https?:\/\//.test(w.url || ""))
       return `<li><a class="w-row" href="${esc(w.url)}" target="_blank" rel="noopener">${inner}</a></li>`;
     if (w.url) {
@@ -190,7 +191,9 @@ async function renderWorks(site) {
   const show = (key) => {
     if (key !== "all" && !cats.some((c) => slug(c) === key)) key = "all";
     const list = works.map((w, i) => [w, i]).filter(([w]) => key === "all" || slug(w.category || "") === key);
-    grid.innerHTML = list.map(([w, i]) => row(w, i)).join("");
+    grid.innerHTML = list.length
+      ? `<li class="w-rules" aria-hidden="true"><i></i><i></i><i></i></li>` + list.map(([w, i]) => row(w, i)).join("")
+      : "";
     $("#w-empty").hidden = list.length > 0;
     document.querySelectorAll(".w-tabs button").forEach((b) =>
       b.setAttribute("aria-current", b.dataset.cat === key ? "true" : "false"));
