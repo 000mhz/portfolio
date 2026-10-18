@@ -45,8 +45,9 @@ function renderSide(site, current) {
 
   // Top以外のページは左カラムを空にして、中身の位置だけTopとそろえる
   if (current !== "top") {
+    const titles = { profile: "Profile", works: "Studies", members: "Members" };
     $("#side").classList.add("is-compact");
-    $("#side").innerHTML = "";
+    $("#side").innerHTML = `<h1 class="page-title">${titles[current] || ""}</h1>`;
     $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer">${footer}</footer>`);
     return;
   }
@@ -142,7 +143,6 @@ async function renderTop(site) {
 async function renderProfile(site) {
   const p = site.profile || {};
   $("#main").innerHTML = `
-    <p class="page-head">Profile</p>
     <div class="stack">
       <section class="panel"><h2>About</h2>${(p.bio || []).map((t) => `<p>${esc(t)}</p>`).join("")}</section>
       <section class="panel"><h2>History</h2><ul class="history">${(p.history || [])
@@ -180,7 +180,6 @@ async function renderWorks(site) {
   };
 
   $("#main").innerHTML = `
-    <p class="page-head">Studies</p>
     <nav class="w-tabs" aria-label="Categories">
       <button type="button" data-cat="all">All</button>
       ${cats.map((c) => `<button type="button" data-cat="${slug(c)}">${esc(c)}</button>`).join("")}

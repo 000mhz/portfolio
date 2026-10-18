@@ -89,7 +89,7 @@ img { display: block; max-width: 100%; }
 }
 .side .avatar-empty { display: grid; place-items: center; color: var(--muted); }
 .side .avatar-empty svg { width: 34%; height: 34%; }
-.side h1 {
+.side h1, .side .page-title {
   font-size: 28px;
   line-height: 1.1;
   font-weight: 500;
@@ -200,7 +200,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .chips span, .chips a { border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: 14px; }
 .chips a:hover { background: var(--soft); }
 
-.w-tabs { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: -6px 0 22px; }
+.w-tabs { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0 0 22px; }
 .w-tabs button {
   font-family: var(--font-gothic);
   font-weight: 700;
@@ -324,7 +324,6 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .site-header-in { padding: 0 20px; }
   .side-nav { gap: 4px 16px; }
   .side .avatar { width: 112px; height: 112px; }
-  .side.is-compact { display: none; }
   .page-footer { grid-column: auto; }
 }
 @media (max-width: 640px) {

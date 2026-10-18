@@ -12,6 +12,7 @@
   if (INDEX_LINKS) {
     $("g-back").href = ROOT + "index.html";
     $("g-up").href = ROOT + "works/index.html";
+    $("g-close").href = ROOT + "works/index.html";
   }
 
   let photos = [];
@@ -93,6 +94,7 @@
       if (e.key === "ArrowLeft") show(index - 1);
       else if (e.key === "ArrowRight") show(index + 1);
       else if (e.key === " ") { e.preventDefault(); paused = !paused; }
+      else if (e.key === "Escape") location.href = $("g-close").href;
     });
 
     // ストーリーズ風：押している間は一時停止、横スワイプでページ送り
