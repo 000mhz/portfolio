@@ -143,8 +143,7 @@ async function renderTop(site) {
 async function renderProfile(site) {
   const p = site.profile || {};
   const block = (lang, d) => d ? `
-    <section class="panel profile-text" lang="${lang}">
-      <h2>${esc(d.label || "")}</h2>
+    <section class="profile-text" lang="${lang}">
       <p class="p-name">${esc(d.name || "")}</p>
       <p class="p-origin">${esc(d.origin || "")}</p>
       ${(d.bio || []).map((t) => `<p class="p-bio">${esc(t)}</p>`).join("")}
@@ -155,10 +154,10 @@ async function renderProfile(site) {
           .join("")}</dl>` : ""}
     </section>` : "";
   $("#main").innerHTML = `
-    <div class="stack">
+    <div class="panel profile-panel">
       ${block("ja", p.ja)}
       ${block("en", p.en)}
-      <section class="panel"><h2>Contact</h2><div class="chips">${(site.sns || [])
+      <section class="profile-contact"><h2>Contact</h2><div class="chips">${(site.sns || [])
         .map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`)
         .join("")}</div></section>
     </div>`;
