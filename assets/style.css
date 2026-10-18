@@ -227,7 +227,7 @@ a.w-row:hover .w-title, button.w-row:hover .w-title { padding-left: 10px; }
 .w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
 .w-year { font-size: 13px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
-.w-cat { font-size: 13px; font-style: italic; text-align: right; }
+.w-cat { font-size: 13px; font-style: italic; text-align: left; }
 .w-empty { color: var(--muted); font-style: italic; padding: 40px 0; }
 .lightbox {
   position: fixed;
