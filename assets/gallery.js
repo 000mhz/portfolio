@@ -1,7 +1,10 @@
-// soblue gallery — photos come from data/soblue.json
+// full-screen gallery — images come from data/<body data-gallery>.json (default: soblue)
 // [{ "image": "images/soblue/01.webp", "caption": "" }, ...]
 (() => {
   const ROOT = document.body.dataset.root || "./";
+  const ALT = (document.title.split(" — ")[0] || "").replace(/"/g, "");
+  // data-fit="contain": never crop (graphic work) — every image sits centred, UI stays ink
+  const CONTAIN = document.body.dataset.fit === "contain";
   const INDEX_LINKS = document.body.dataset.indexlinks === "1"; // プレビュー環境用
   const DURATION = 4000; // 1枚あたりの表示時間（ミリ秒）
 
@@ -37,7 +40,7 @@
     s.dataset.loaded = "1";
     const img = s.querySelector("img");
     img.addEventListener("load", () => {
-      s.classList.toggle("is-landscape", img.naturalWidth > img.naturalHeight);
+      s.classList.toggle("is-landscape", !CONTAIN && img.naturalWidth > img.naturalHeight);
       updateUi();
     }, { once: true });
     img.src = src(photos[i].image);
@@ -73,11 +76,11 @@
   }
 
   async function init() {
-    photos = await (await fetch(ROOT + "data/soblue.json", { cache: "no-cache" })).json();
+    photos = await (await fetch(ROOT + "data/" + (document.body.dataset.gallery || "soblue") + ".json", { cache: "no-cache" })).json();
     if (!photos.length) return;
 
     stage.innerHTML = photos
-      .map((p, i) => `<figure class="g-slide"><img alt="So Blue YOKOHAMA STADIUM 2025 ${i + 1}" draggable="false"></figure>`)
+      .map((p, i) => `<figure class="g-slide"><img alt="${ALT} ${i + 1}" draggable="false"></figure>`)
       .join("");
     slides = [...stage.children];
 

@@ -47,5 +47,14 @@
     "image": "images/illustration/illust-05.webp",
     "description": "",
     "url": ""
+  },
+  {
+    "title": "The Voyage",
+    "subtitle": "DOCOMO",
+    "year": "2022",
+    "category": "Graphic Design",
+    "image": "images/voyage/voyage-01.webp",
+    "description": "",
+    "url": "works/voyage/"
   }
 ]
