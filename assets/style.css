@@ -55,8 +55,7 @@ img { display: block; max-width: 100%; }
 .side .site-name {
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  letter-spacing: .06em;
   color: var(--muted);
 }
 .side .avatar {

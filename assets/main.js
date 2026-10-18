@@ -80,6 +80,9 @@ async function loadInstagram(cfg) {
 
 async function renderTop(site) {
   const works = await getJSON("data/works.json");
+  // メインビジュアル：Worksの画像からランダムに1枚
+  const pool = works.filter((w) => w.image);
+  const mv = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
   const ig = site.instagram || {};
   const sns = (site.sns || []).filter((s) => (s.icon || s.label || "").toLowerCase() !== "instagram");
 
@@ -100,7 +103,7 @@ async function renderTop(site) {
 
   $("#main").innerHTML = `
     <div class="bento">
-      ${site.mv ? `<div class="tile t-mv w4 h2"><img src="${esc(src(site.mv))}" alt=""></div>` : ""}
+      ${mv ? `<div class="tile t-mv w4 h2"><img src="${esc(src(mv.image))}" alt="${esc(mv.title)}"></div>` : ""}
       <section class="tile t-insta w2 h2">
         <a class="head" href="${esc(ig.profileUrl || "#")}" target="_blank" rel="noopener">
           <span class="icon-chip">${ICONS.instagram}</span>
