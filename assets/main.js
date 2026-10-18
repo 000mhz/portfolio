@@ -155,6 +155,7 @@ async function renderProfile(site) {
     </section>` : "";
   $("#main").innerHTML = `
     <div class="panel profile-panel">
+      ${p.photo ? `<img class="p-photo" src="${esc(src(p.photo))}" alt="${esc(site.name)}">` : ""}
       ${block("ja", p.ja)}
       ${block("en", p.en)}
       <section class="profile-contact"><h2>Contact</h2><div class="chips">${(site.sns || [])

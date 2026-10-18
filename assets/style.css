@@ -195,6 +195,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .panel p + p { margin-top: .8em; }
 /* profile text (Japanese above, English below) */
 .panel.profile-panel { background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0; }
+.p-photo { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; background: var(--soft); border: 1px solid var(--line); margin-bottom: 28px; }
 .profile-panel > section + section { margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--line); }
 .profile-text .p-name { font-size: 22px; line-height: 1.3; }
 .profile-text .p-origin { color: var(--sub); font-size: 14px; margin: 2px 0 18px; }
@@ -354,6 +355,7 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .w-year, .w-cat { font-size: 12px; }
   .panel { padding: 24px; }
   .p-likes { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .p-photo { width: 112px; height: 112px; margin-bottom: 20px; }
   .p-likes dd { margin-bottom: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
