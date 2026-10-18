@@ -96,6 +96,8 @@ img { display: block; max-width: 100%; }
   letter-spacing: -.01em;
   text-wrap: balance;
 }
+/* letter-spacing を 0 以外にするとブラウザが fi などのリガチャを切るので、ページタイトルは 0 に */
+.side .page-title { letter-spacing: 0; }
 .side .role { color: var(--sub); font-size: 16px; font-style: italic; margin-top: 6px; }
 .side .tagline { font-size: 15px; line-height: 1.8; letter-spacing: .24em; color: var(--ink); max-width: 32ch; }
 .side .loc { font-size: 14px; color: var(--muted); }
