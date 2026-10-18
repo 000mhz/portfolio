@@ -55,7 +55,8 @@
     "category": "Graphic Design",
     "image": "images/voyage/voyage-01.webp",
     "description": "",
-    "url": "works/voyage/"
+    "url": "works/voyage/",
+    "mv": "images/voyage/voyage-02.webp"
   },
   {
     "title": "福島おみやげGUIDE",
@@ -64,6 +65,7 @@
     "category": "Graphic Design",
     "image": "images/omiyage/omiyage-01.webp",
     "description": "",
-    "url": "works/omiyage/"
+    "url": "works/omiyage/",
+    "mv": "images/omiyage/omiyage-02.webp"
   }
 ]

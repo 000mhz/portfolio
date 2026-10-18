@@ -85,7 +85,11 @@ async function loadInstagram(cfg) {
 async function renderTop(site) {
   const works = await getJSON("data/works.json");
   // メインビジュアル：Worksの画像からランダムに1枚（横長だけ。縦位置・正方形はトリミングで崩れるので除外）
-  const pool = works.filter((w) => w.image).sort(() => Math.random() - 0.5);
+  // 作品に "mv" があればトップ用にその画像を使う（サムネイルが縦長・正方形の作品向け）
+  const pool = works
+    .filter((w) => w.mv || w.image)
+    .map((w) => ({ ...w, image: w.mv || w.image }))
+    .sort(() => Math.random() - 0.5);
   const isWide = (url) =>
     new Promise((ok) => {
       const im = new Image();
