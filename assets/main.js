@@ -142,15 +142,22 @@ async function renderTop(site) {
 
 async function renderProfile(site) {
   const p = site.profile || {};
+  const block = (lang, d) => d ? `
+    <section class="panel profile-text" lang="${lang}">
+      <h2>${esc(d.label || "")}</h2>
+      <p class="p-name">${esc(d.name || "")}</p>
+      <p class="p-origin">${esc(d.origin || "")}</p>
+      ${(d.bio || []).map((t) => `<p class="p-bio">${esc(t)}</p>`).join("")}
+      ${d.likes && d.likes.length ? `
+        <h3 class="p-likes-head">${esc(d.likesLabel || "")}</h3>
+        <dl class="p-likes">${d.likes
+          .map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`)
+          .join("")}</dl>` : ""}
+    </section>` : "";
   $("#main").innerHTML = `
     <div class="stack">
-      <section class="panel"><h2>About</h2>${(p.bio || []).map((t) => `<p>${esc(t)}</p>`).join("")}</section>
-      <section class="panel"><h2>History</h2><ul class="history">${(p.history || [])
-        .map((h) => `<li><span class="y">${esc(h.year)}</span><span>${esc(h.text)}</span></li>`)
-        .join("")}</ul></section>
-      <section class="panel"><h2>Skills</h2><div class="chips">${(p.skills || [])
-        .map((s) => `<span>${esc(s)}</span>`)
-        .join("")}</div></section>
+      ${block("ja", p.ja)}
+      ${block("en", p.en)}
       <section class="panel"><h2>Contact</h2><div class="chips">${(site.sns || [])
         .map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`)
         .join("")}</div></section>

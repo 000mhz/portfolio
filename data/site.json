@@ -30,21 +30,92 @@
   },
   "profile": {
     "photo": "images/profile.jpg",
-    "bio": [
-      "ここに自己紹介文を書きます。",
-      "段落ごとに分けて書けます。"
-    ],
-    "history": [
-      {
-        "year": "2026",
-        "text": "ポートフォリオサイト公開"
-      }
-    ],
-    "skills": [
-      "Design",
-      "Photography",
-      "Web"
-    ]
+    "ja": {
+      "label": "日本語",
+      "name": "鈴木 大",
+      "origin": "福島県生まれ。神奈川県在住。",
+      "bio": [
+        "編集者を志していたが、紙面をつくること自体に惹かれ、デザイナーとしてキャリアをスタートした。パッケージ、ロゴ、広告、パンフレットといった印刷物のグラフィックデザインから、Webサイトの制作までを中心に手がけてきた。朗文堂の新宿私塾でタイポグラフィを学び、その奥深さに打ちのめされる。現在はWebサービスのUI/UXデザインを主に担当している。"
+      ],
+      "likesLabel": "好きなこと",
+      "likes": [
+        [
+          "野球観戦",
+          "横浜DeNAベイスターズ"
+        ],
+        [
+          "読書",
+          "沢木耕太郎、夏目漱石、燃え殻、立花隆、多和田葉子、星野道夫、星新一、岸政彦、講談社ブルーバックス"
+        ],
+        [
+          "漫画",
+          "藤子・F・不二雄、山本直樹、諸星大二郎、宮崎駿、大友克洋、細野不二彦、星野之宣"
+        ],
+        [
+          "洋楽",
+          "The Clash、New Order、Radiohead、Travis、Wilco、Daft Punk、The Strokes、Feist、The Avalanches ほか"
+        ],
+        [
+          "邦楽",
+          "細野晴臣、大瀧詠一、ムーンライダーズ、サニーデイ・サービス、くるり、PUNPEE、iri ほか"
+        ],
+        [
+          "ゲーム",
+          "ゲームボーイ、スーパーファミコン"
+        ],
+        [
+          "カメラ",
+          "GR、チェキ"
+        ],
+        [
+          "そのほか",
+          "ラジオ、料理"
+        ]
+      ]
+    },
+    "en": {
+      "label": "English",
+      "name": "Dai Suzuki",
+      "origin": "Born in Fukushima, Japan. Based in Kanagawa.",
+      "bio": [
+        "Originally aspiring to be an editor, Dai found himself drawn to the making of the printed page itself and began his career as a designer. His work has centered on graphic design for print — packaging, logos, advertising and brochures — along with website production. Studying typography at Shinjuku Shijuku, the school run by the type foundry Robundo, left him humbled by how deep the craft goes. These days he focuses mainly on UI/UX design for web services."
+      ],
+      "likesLabel": "Things I love",
+      "likes": [
+        [
+          "Baseball",
+          "Yokohama DeNA BayStars"
+        ],
+        [
+          "Books",
+          "Kotaro Sawaki, Soseki Natsume, Moegara, Takashi Tachibana, Yoko Tawada, Michio Hoshino, Shinichi Hoshi, Masahiko Kishi, Kodansha Blue Backs"
+        ],
+        [
+          "Manga",
+          "Fujiko F. Fujio, Naoki Yamamoto, Daijiro Morohoshi, Hayao Miyazaki, Katsuhiro Otomo, Fujihiko Hosono, Yukinobu Hoshino"
+        ],
+        [
+          "Music (international)",
+          "The Clash, New Order, Radiohead, Travis, Wilco, Daft Punk, The Strokes, Feist, The Avalanches and more"
+        ],
+        [
+          "Music (Japanese)",
+          "Haruomi Hosono, Eiichi Ohtaki, Moonriders, Sunny Day Service, Quruli, PUNPEE, iri and more"
+        ],
+        [
+          "Games",
+          "Game Boy, Super Famicom"
+        ],
+        [
+          "Cameras",
+          "GR, instax (Cheki)"
+        ],
+        [
+          "Also",
+          "Radio, cooking"
+        ]
+      ]
+    }
   },
   "workCategories": [
     "Photography",

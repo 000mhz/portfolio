@@ -193,9 +193,15 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .panel h2 { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
 .panel p { max-width: 62ch; }
 .panel p + p { margin-top: .8em; }
-.history li { list-style: none; display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--line); }
-.history li:first-child { border-top: 0; padding-top: 0; }
-.history .y { color: var(--muted); font-variant-numeric: tabular-nums; }
+/* profile text (Japanese above, English below) */
+.profile-text .p-name { font-size: 22px; line-height: 1.3; }
+.profile-text .p-origin { color: var(--sub); font-size: 14px; margin: 2px 0 18px; }
+.profile-text .p-bio { max-width: 60ch; line-height: 2; }
+.profile-text[lang="en"] .p-bio { line-height: 1.75; }
+.p-likes-head { font-size: 13px; font-weight: 400; font-style: italic; color: var(--muted); margin: 28px 0 10px; }
+.p-likes { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 24px; row-gap: 8px; font-size: 14px; line-height: 1.8; }
+.p-likes dt { color: var(--muted); }
+.p-likes dd { min-width: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips span, .chips a { border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: 14px; }
 .chips a:hover { background: var(--soft); }
@@ -345,6 +351,8 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .w-title { font-size: 19px; }
   .w-year, .w-cat { font-size: 12px; }
   .panel { padding: 24px; }
+  .p-likes { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .p-likes dd { margin-bottom: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
