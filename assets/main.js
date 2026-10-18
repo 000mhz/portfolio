@@ -26,7 +26,7 @@ function renderSide(site, current) {
   const nav = [
     ["Top", "", "top"],
     ["Profile", "profile", "profile"],
-    ["Works", "works", "works"],
+    ["Studies", "works", "works"],
   ]
     .map(([label, dir, key]) =>
       `<a href="${pageUrl(dir)}"${key === current ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -117,7 +117,7 @@ async function renderTop(site) {
         <span class="arrow">→</span><h2>Profile</h2><p>About me</p>
       </a>
       <a class="tile t-link t-works w4" href="${pageUrl("works")}">
-        <span class="text"><span class="arrow">→</span><h2>Works</h2><p>${works.length} projects</p></span>
+        <span class="text"><span class="arrow">→</span><h2>Studies</h2><p>${works.length} pieces</p></span>
         <span class="thumbs">${thumbs}</span>
       </a>
     </div>`;
@@ -177,7 +177,7 @@ async function renderWorks(site) {
   };
 
   $("#main").innerHTML = `
-    <p class="page-head">Works</p>
+    <p class="page-head">Studies</p>
     <nav class="w-tabs" aria-label="Categories">
       <button type="button" data-cat="all">All</button>
       ${cats.map((c) => `<button type="button" data-cat="${slug(c)}">${esc(c)}</button>`).join("")}
@@ -231,7 +231,8 @@ async function renderWorks(site) {
 (async () => {
   const page = document.body.dataset.page;
   const site = await getJSON("data/site.json");
-  document.title = page === "top" ? site.siteName || site.name : `${page[0].toUpperCase() + page.slice(1)} — ${site.siteName || site.name}`;
+  const titles = { profile: "Profile", works: "Studies", members: "Members" };
+  document.title = page === "top" ? site.siteName || site.name : `${titles[page] || page} — ${site.siteName || site.name}`;
   renderSide(site, page);
   const render = { top: renderTop, profile: renderProfile, works: renderWorks }[page];
   if (render) await render(site);
