@@ -262,6 +262,23 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
 .site-footer { margin-top: auto; padding-top: 24px; color: var(--muted); font-size: 13px; }
 
+/* ---------- Profile / Works: header + centred content ---------- */
+body:not([data-page="top"]) .layout {
+  max-width: 960px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 56px;
+  padding-block: 40px 64px;
+}
+body:not([data-page="top"]) .side { position: static; gap: 0; }
+body:not([data-page="top"]) .side-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+body:not([data-page="top"]) .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
+.page-footer .site-footer { margin-top: 0; padding-top: 0; }
+
 /* ---------- PC: Top page fits in one screen ---------- */
 @media (min-width: 961px) and (min-height: 620px) {
   body[data-page="top"] { --gap: 18px; }

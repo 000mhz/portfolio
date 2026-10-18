@@ -32,6 +32,17 @@ function renderSide(site, current) {
       `<a href="${pageUrl(dir)}"${key === current ? ' aria-current="page"' : ""}>${label}</a>`)
     .join("");
   const p = site.profile || {};
+  const footer = `<p class="site-footer">© ${new Date().getFullYear()} ${esc(site.siteName || site.name)}</p>`;
+  // Top以外のページは、サイト名とメニューだけのヘッダーにする
+  if (current !== "top") {
+    $("#side").innerHTML = `
+      <div class="side-head">
+        <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
+        <nav class="side-nav" aria-label="Pages">${nav}</nav>
+      </div>`;
+    $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer">${footer}</footer>`);
+    return;
+  }
   $("#side").innerHTML = `
     <div class="side-head">
       <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
@@ -44,7 +55,7 @@ function renderSide(site, current) {
     </div>
     ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
     ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
-    <p class="site-footer">© ${new Date().getFullYear()} ${esc(site.siteName || site.name)}</p>`;
+    ${footer}`;
 }
 
 async function loadInstagram(cfg) {
