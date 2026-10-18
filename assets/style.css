@@ -16,6 +16,7 @@
   --gap: 24px;
   --font: "Ibarra Real Nova", "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-gothic: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --header-h: 72px;
   color-scheme: light;
 }
 
@@ -37,7 +38,7 @@ img { display: block; max-width: 100%; }
 .layout {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 40px 32px 80px;
+  padding: calc(var(--header-h) + 16px) 32px 80px;
   display: grid;
   grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
   gap: 64px;
@@ -46,13 +47,33 @@ img { display: block; max-width: 100%; }
 /* ---------- left: profile column ---------- */
 .side {
   position: sticky;
-  top: 40px;
+  top: calc(var(--header-h) + 16px);
   align-self: start;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-.side .site-name {
+/* ---------- fixed header: site name + menu ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: var(--bg);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.site-header-in {
+  max-width: 1240px;
+  height: var(--header-h);
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.site-name {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: .06em;
@@ -79,9 +100,7 @@ img { display: block; max-width: 100%; }
 .side .tagline { font-size: 15px; line-height: 1.8; letter-spacing: .24em; color: var(--ink); max-width: 32ch; }
 .side .loc { font-size: 14px; color: var(--muted); }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
-.side-head { display: contents; }
-.side-nav { order: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-.side .site-footer { order: 2; }
+.side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
 .side-nav a {
   font-family: var(--font-gothic);
   font-weight: 700;
@@ -268,14 +287,14 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
 .site-footer { margin-top: auto; padding-top: 24px; color: var(--muted); font-size: 13px; }
 
-/* ---------- Profile / Studies: same frame as Top, profile hidden ---------- */
-/* PC: keep the hidden profile's space so the site name and menu sit exactly where they do on Top */
-.side.is-compact .side-profile { visibility: hidden; }
+/* ---------- Profile / Studies: same frame as Top, left column left empty ---------- */
+.page-footer { grid-column: 2; }
+.page-footer .site-footer { padding-top: 0; }
 
 /* ---------- PC: Top page fits in one screen ---------- */
 @media (min-width: 961px) and (min-height: 620px) {
   body[data-page="top"] { --gap: 18px; }
-  body[data-page="top"] .layout { height: 100dvh; padding-block: 40px; gap: 64px; }
+  body[data-page="top"] .layout { height: 100dvh; padding-bottom: 40px; gap: 64px; }
   body[data-page="top"] .side { position: static; align-self: stretch; gap: 24px; min-height: 0; }
   body[data-page="top"] #main { height: 100%; min-height: 0; }
   body[data-page="top"] .bento { height: 100%; grid-template-rows: repeat(5, minmax(0, 1fr)); grid-auto-rows: auto; }
@@ -299,17 +318,19 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .t-works .thumbs img:nth-child(3) { display: none; }
 }
 @media (max-width: 960px) {
-  .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 40px 20px 64px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: calc(var(--header-h) + 12px) 20px 64px; }
   .side { position: static; gap: 18px; }
-  .side-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
-  .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 16px; }
-  .side-nav a { font-size: 13px; }
+  :root { --header-h: 60px; }
+  .site-header-in { padding: 0 20px; }
+  .side-nav { gap: 4px 16px; }
   .side .avatar { width: 112px; height: 112px; }
-  .side.is-compact .side-profile, .side.is-compact .site-footer { display: none; }
+  .side.is-compact { display: none; }
+  .page-footer { grid-column: auto; }
 }
 @media (max-width: 640px) {
   :root { --gap: 14px; }
-  .layout { padding: 32px 16px 56px; }
+  .layout { padding: calc(var(--header-h) + 8px) 16px 56px; }
+  .site-header-in { padding: 0 16px; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: calc((100cqi - var(--gap)) / 2); }
   .w4 { grid-column: span 2; }
   .t-mv.h2 { grid-row: span 1; }
