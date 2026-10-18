@@ -56,5 +56,14 @@
     "image": "images/voyage/voyage-01.webp",
     "description": "",
     "url": "works/voyage/"
+  },
+  {
+    "title": "福島おみやげGUIDE",
+    "subtitle": "会津若松編",
+    "year": "2018",
+    "category": "Graphic Design",
+    "image": "images/omiyage/omiyage-01.webp",
+    "description": "",
+    "url": "works/omiyage/"
   }
 ]
