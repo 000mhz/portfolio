@@ -33,28 +33,20 @@ function renderSide(site, current) {
     .join("");
   const p = site.profile || {};
   const footer = `<p class="site-footer">© ${new Date().getFullYear()} ${esc(site.siteName || site.name)}</p>`;
-  // Top以外のページは、サイト名とメニューだけのヘッダーにする
-  if (current !== "top") {
-    $("#side").innerHTML = `
-      <div class="side-head">
-        <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
-        <nav class="side-nav" aria-label="Pages">${nav}</nav>
-      </div>`;
-    $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer">${footer}</footer>`);
-    return;
-  }
+  // Top以外のページは、サイト名とメニューだけを表示（位置はTopと同じにするため、他の要素は見えない状態で残す）
+  $("#side").classList.toggle("is-compact", current !== "top");
   $("#side").innerHTML = `
     <div class="side-head">
       <a class="site-name" href="${pageUrl("")}">${esc(site.siteName || site.name)}</a>
       <nav class="side-nav" aria-label="Pages">${nav}</nav>
     </div>
-    ${p.photo ? `<img class="avatar" src="${esc(src(p.photo))}" alt="${esc(site.name)}">` : `<span class="avatar avatar-empty" aria-hidden="true">${ICONS.image}</span>`}
-    <div>
+    ${p.photo ? `<img class="avatar side-profile" src="${esc(src(p.photo))}" alt="${esc(site.name)}">` : `<span class="avatar avatar-empty side-profile" aria-hidden="true">${ICONS.image}</span>`}
+    <div class="side-profile">
       <h1>${esc(site.name)}</h1>
       <p class="role">${esc(site.role || "")}</p>
     </div>
-    ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
-    ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
+    ${site.tagline ? `<p class="tagline side-profile">${esc(site.tagline)}</p>` : ""}
+    ${site.location ? `<p class="loc side-profile">${esc(site.location)}</p>` : ""}
     ${footer}`;
 }
 

@@ -37,20 +37,20 @@ img { display: block; max-width: 100%; }
 .layout {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 64px 32px 80px;
+  padding: 40px 32px 80px;
   display: grid;
   grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
-  gap: 72px;
+  gap: 64px;
 }
 
 /* ---------- left: profile column ---------- */
 .side {
   position: sticky;
-  top: 64px;
+  top: 40px;
   align-self: start;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
 }
 .side .site-name {
   font-size: 14px;
@@ -268,22 +268,9 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
 .site-footer { margin-top: auto; padding-top: 24px; color: var(--muted); font-size: 13px; }
 
-/* ---------- Profile / Works: header + centred content ---------- */
-body:not([data-page="top"]) .layout {
-  max-width: 960px;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 56px;
-  padding-block: 40px 64px;
-}
-body:not([data-page="top"]) .side { position: static; gap: 0; }
-body:not([data-page="top"]) .side-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-}
-body:not([data-page="top"]) .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
-.page-footer .site-footer { margin-top: 0; padding-top: 0; }
+/* ---------- Profile / Studies: same frame as Top, profile hidden ---------- */
+/* PC: keep the hidden profile's space so the site name and menu sit exactly where they do on Top */
+.side.is-compact .side-profile { visibility: hidden; }
 
 /* ---------- PC: Top page fits in one screen ---------- */
 @media (min-width: 961px) and (min-height: 620px) {
@@ -294,8 +281,8 @@ body:not([data-page="top"]) .side-nav { flex-direction: row; flex-wrap: wrap; ju
   body[data-page="top"] .bento { height: 100%; grid-template-rows: repeat(5, minmax(0, 1fr)); grid-auto-rows: auto; }
 }
 @media (min-width: 961px) and (min-height: 620px) and (max-height: 800px) {
-  body[data-page="top"] .side .avatar { width: 128px; height: 128px; }
-  body[data-page="top"] .side { gap: 18px; }
+  .side .avatar { width: 128px; height: 128px; }
+  body[data-page] .side { gap: 18px; }
   body[data-page="top"] .tile { padding: 16px 18px; }
   body[data-page="top"] .t-mv { padding: 0; }
   body[data-page="top"] .t-works { padding: 12px; }
@@ -318,6 +305,7 @@ body:not([data-page="top"]) .side-nav { flex-direction: row; flex-wrap: wrap; ju
   .side-nav { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: 4px 16px; }
   .side-nav a { font-size: 13px; }
   .side .avatar { width: 112px; height: 112px; }
+  .side.is-compact .side-profile, .side.is-compact .site-footer { display: none; }
 }
 @media (max-width: 640px) {
   :root { --gap: 14px; }
