@@ -194,7 +194,8 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .panel p { max-width: 62ch; }
 .panel p + p { margin-top: .8em; }
 /* profile text (Japanese above, English below) */
-.panel.profile-panel { background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0; }
+.panel.profile-panel { background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0; max-width: 560px; }
+.profile-panel .p-bio { max-width: none; }
 .p-photo { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; background: var(--soft); border: 1px solid var(--line); margin-bottom: 28px; }
 .profile-panel > section + section { margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--line); }
 .profile-text .p-name { font-size: 22px; line-height: 1.3; }
