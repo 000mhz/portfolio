@@ -84,9 +84,17 @@ async function loadInstagram(cfg) {
 
 async function renderTop(site) {
   const works = await getJSON("data/works.json");
-  // メインビジュアル：Worksの画像からランダムに1枚
-  const pool = works.filter((w) => w.image);
-  const mv = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+  // メインビジュアル：Worksの画像からランダムに1枚（横長だけ。縦位置・正方形はトリミングで崩れるので除外）
+  const pool = works.filter((w) => w.image).sort(() => Math.random() - 0.5);
+  const isWide = (url) =>
+    new Promise((ok) => {
+      const im = new Image();
+      im.onload = () => ok(im.naturalWidth > im.naturalHeight * 1.1);
+      im.onerror = () => ok(false);
+      im.src = url;
+    });
+  let mv = null;
+  for (const w of pool) if (await isWide(src(w.image))) { mv = w; break; }
   const ig = site.instagram || {};
   const sns = (site.sns || []).filter((s) => (s.icon || s.label || "").toLowerCase() !== "instagram");
 
