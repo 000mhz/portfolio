@@ -66,6 +66,8 @@ function renderSide(site, current) {
       <button class="theme-dot dot-dark" type="button" data-theme="dark" title="Dark mode" aria-label="Dark mode"></button>
       <button class="theme-dot dot-mac" type="button" data-theme="mac" title="Mac OS 8" aria-label="Mac OS 8"></button>
       <button class="theme-dot dot-win" type="button" data-theme="win" title="Windows 95" aria-label="Windows 95"></button>
+      <button class="theme-dot dot-gb" type="button" data-theme="gb" title="Game Boy" aria-label="Game Boy"></button>
+      <button class="theme-dot dot-sfc" type="button" data-theme="sfc" title="Super Famicom" aria-label="Super Famicom"></button>
     </div>
     ${footer}`;
   // ドットを押すとその見た目に切り替え、もう一度押すと元（白）に戻る。選んだ見た目は全ページで保持
@@ -73,9 +75,9 @@ function renderSide(site, current) {
   const sync = () => dots.forEach((d) => d.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === d.dataset.theme)));
   dots.forEach((d) => d.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === d.dataset.theme ? "" : d.dataset.theme;
-    if (next) document.documentElement.dataset.theme = next;
+    if (window.applyTheme) window.applyTheme(next);
+    else if (next) document.documentElement.dataset.theme = next;
     else delete document.documentElement.dataset.theme;
-    try { next ? localStorage.setItem("theme", next) : localStorage.removeItem("theme"); } catch (_) {}
     sync();
   }));
   sync();

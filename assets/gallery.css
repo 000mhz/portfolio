@@ -163,3 +163,6 @@ body.ui-light .g-close svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 html[data-theme="dark"] .g-ui { --seg-track: rgba(255, 255, 255, .2); }
 html[data-theme="mac"] .g-ui { --seg-track: rgba(0, 0, 0, .25); }
 html[data-theme="win"] .g-ui { --seg-track: rgba(0, 0, 0, .25); }
+html[data-theme="gb"] .g-ui { --seg-track: rgba(15, 56, 15, .25); }
+html[data-theme="gb"] .g-title, html[data-theme="sfc"] .g-title { font-weight: 400; }
+html[data-theme="sfc"] .g-ui { --seg-track: rgba(255, 255, 255, .25); }

@@ -111,6 +111,8 @@ img { display: block; max-width: 100%; }
 .theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 3px; }
 .dot-dark { background: var(--ink); }
 .dot-win { background: #008080; box-shadow: inset 1px 1px 0 #5fc4c4, inset -1px -1px 0 #003c3c, 0 0 0 1px #000; }
+.dot-gb { background: #9bbc0f; box-shadow: inset 0 0 0 3px #306230; border-radius: 0; }
+.dot-sfc { background: conic-gradient(#e60012 0 25%, #f5b800 0 50%, #13a538 0 75%, #2a7de1 0); }
 .dot-mac { background: radial-gradient(circle at 35% 30%, #fff 0, #d4d4d4 40%, #8a8a8a 100%); box-shadow: inset 0 0 0 1px #555; }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
@@ -617,3 +619,102 @@ html[data-theme="win"] body[data-page="top"] .side { position: relative; top: 0;
 @media (max-width: 960px) {
   html[data-theme="mac"] .side, html[data-theme="win"] .side { position: relative; top: 0; }
 }
+
+/* ---------- Game Boy (4 shades of green, dot font) ---------- */
+html[data-theme="gb"] {
+  --bg: #9bbc0f;
+  --tile: #8bac0f;
+  --ink: #0f380f;
+  --sub: #306230;
+  --muted: #306230;
+  --line: #306230;
+  --soft: #9bbc0f;
+  --shadow: 4px 4px 0 #0f380f;
+  --shadow-hover: 6px 6px 0 #0f380f;
+  --radius: 0;
+  --radius-inner: 0;
+  --rule: #0f380f;
+  --list-ink: #0f380f;
+  --hover: #8bac0f;
+  --font: "DotGothic16", "Osaka-Mono", monospace;
+  --font-gothic: "DotGothic16", "Osaka-Mono", monospace;
+}
+html[data-theme="gb"] body { -webkit-font-smoothing: none; }
+html[data-theme="gb"] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none;
+  background:
+    linear-gradient(rgba(15, 56, 15, .06) 1px, transparent 1px) 0 0 / 3px 3px,
+    linear-gradient(90deg, rgba(15, 56, 15, .06) 1px, transparent 1px) 0 0 / 3px 3px;
+}
+html[data-theme="gb"] * { font-weight: 400 !important; font-style: normal !important; }
+html[data-theme="gb"] img { filter: url(#gb-filter); image-rendering: pixelated; }
+html[data-theme="gb"] :focus-visible { outline: 3px solid #0f380f; outline-offset: 2px; border-radius: 0; }
+html[data-theme="gb"] .site-header { border-bottom: 3px solid #0f380f; }
+html[data-theme="gb"] .site-name, html[data-theme="gb"] .side-nav a { color: #0f380f; letter-spacing: .04em; }
+html[data-theme="gb"] .side-nav a { color: #306230; }
+html[data-theme="gb"] .side-nav a[aria-current="page"]::before,
+html[data-theme="gb"] .w-tabs button[aria-current="true"]::before { content: "▶"; margin-right: .3em; }
+html[data-theme="gb"] .tile,
+html[data-theme="gb"] .panel:not(.profile-panel) { border: 3px solid #0f380f; }
+html[data-theme="gb"] a.tile:hover { transform: translate(-2px, -2px); }
+html[data-theme="gb"] .icon-chip { background: #9bbc0f; border: 2px solid #0f380f; }
+html[data-theme="gb"] .insta-grid a,
+html[data-theme="gb"] .insta-grid .ph { background: #9bbc0f; box-shadow: inset 0 0 0 2px #306230; }
+html[data-theme="gb"] .side .avatar,
+html[data-theme="gb"] .p-photo { border: 3px solid #0f380f; }
+html[data-theme="gb"] .chips a { border: 2px solid #0f380f; border-radius: 0; }
+html[data-theme="gb"] .side .tagline { letter-spacing: .14em; }
+html[data-theme="gb"] .w-rules i { height: 3px; }
+html[data-theme="gb"] .w-sub { letter-spacing: .04em; }
+
+/* ---------- Super Famicom (RPG-style blue windows) ---------- */
+html[data-theme="sfc"] {
+  --bg: #0b0b22;
+  --tile: #2238c4;
+  --ink: #fff;
+  --sub: #dde2ff;
+  --muted: #a9b2ec;
+  --line: rgba(255, 255, 255, .35);
+  --soft: rgba(255, 255, 255, .12);
+  --win: linear-gradient(#3550e0, #101a7c);
+  --shadow: 0 0 0 2px #000, 4px 5px 0 2px rgba(0, 0, 0, .55);
+  --shadow-hover: 0 0 0 2px #000, 6px 8px 0 2px rgba(0, 0, 0, .55);
+  --radius: 10px;
+  --radius-inner: 4px;
+  --rule: #fff;
+  --list-ink: #fff;
+  --hover: rgba(255, 255, 255, .12);
+  --font: "DotGothic16", "Osaka-Mono", monospace;
+  --font-gothic: "DotGothic16", "Osaka-Mono", monospace;
+  color-scheme: dark;
+}
+html[data-theme="sfc"] body { -webkit-font-smoothing: none; }
+html[data-theme="sfc"] * { font-weight: 400 !important; font-style: normal !important; }
+html[data-theme="sfc"] :focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+html[data-theme="sfc"] .site-header { border-bottom: 3px solid #f0f0f0; box-shadow: 0 2px 0 #000; }
+html[data-theme="sfc"] .site-name { color: #fff; letter-spacing: .04em; }
+html[data-theme="sfc"] .side-nav a { color: var(--muted); letter-spacing: .04em; }
+html[data-theme="sfc"] .side-nav a[aria-current="page"] { color: #fff; }
+html[data-theme="sfc"] .side-nav a[aria-current="page"]::before,
+html[data-theme="sfc"] .w-tabs button[aria-current="true"]::before { content: "▶"; margin-right: .3em; }
+html[data-theme="sfc"] .tile,
+html[data-theme="sfc"] .side,
+html[data-theme="sfc"] body:not([data-page="top"]) #main {
+  background: var(--win);
+  border: 3px solid #f0f0f0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-shadow: 2px 2px 0 #000;
+}
+html[data-theme="sfc"] .side { padding: 22px; }
+html[data-theme="sfc"] body:not([data-page="top"]) #main { padding: 26px 24px; }
+html[data-theme="sfc"] .t-mv { padding: 0; }
+html[data-theme="sfc"] .icon-chip { background: rgba(0, 0, 0, .2); border: 2px solid #f0f0f0; }
+html[data-theme="sfc"] .insta-grid a,
+html[data-theme="sfc"] .insta-grid .ph { background: rgba(0, 0, 0, .22); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .5); }
+html[data-theme="sfc"] .side .avatar,
+html[data-theme="sfc"] .p-photo { border: 3px solid #f0f0f0; }
+html[data-theme="sfc"] .chips a { border: 2px solid #f0f0f0; }
+html[data-theme="sfc"] .site-footer { color: var(--muted); }
+html[data-theme="sfc"] .w-sub { letter-spacing: .04em; }
+html[data-theme="sfc"] .side .tagline { letter-spacing: .14em; }
