@@ -114,6 +114,7 @@ img { display: block; max-width: 100%; }
 .dot-win { background: #008080; box-shadow: inset 1px 1px 0 #5fc4c4, inset -1px -1px 0 #003c3c, 0 0 0 1px #000; }
 .dot-gb { background: #9bbc0f; box-shadow: inset 0 0 0 3px #306230; border-radius: 0; }
 .dot-sfc { background: conic-gradient(#e60012 0 25%, #f5b800 0 50%, #13a538 0 75%, #2a7de1 0); }
+.dot-ht { background: radial-gradient(circle, #161616 1.1px, transparent 1.5px) 0 0 / 4px 4px, #fff; box-shadow: inset 0 0 0 1px #161616; }
 .dot-mac { background: radial-gradient(circle at 35% 30%, #fff 0, #d4d4d4 40%, #8a8a8a 100%); box-shadow: inset 0 0 0 1px #555; }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
@@ -719,3 +720,43 @@ html[data-theme="sfc"] .chips a { border: 2px solid #f0f0f0; }
 html[data-theme="sfc"] .site-footer { color: var(--muted); }
 html[data-theme="sfc"] .w-sub { letter-spacing: .04em; }
 html[data-theme="sfc"] .side .tagline { letter-spacing: .14em; }
+
+/* ---------- Halftone (print: paper, ink, and every image as a dot screen) ---------- */
+html[data-theme="ht"] {
+  --bg: #f2efe6;
+  --tile: #f2efe6;
+  --ink: #111;
+  --sub: #3a3a3a;
+  --muted: #6a6a6a;
+  --line: #111;
+  --soft: #f2efe6;
+  --shadow: 5px 5px 0 #111;
+  --shadow-hover: 7px 7px 0 #111;
+  --radius: 0;
+  --radius-inner: 0;
+  --rule: #111;
+  --list-ink: #111;
+  --hover: transparent;
+}
+/* a halftone gradient across the paper */
+html[data-theme="ht"] body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(165deg, #fff 40%, #d2d2d2 100%);
+  filter: url(#ht-filter);
+  mix-blend-mode: multiply;
+}
+html[data-theme="ht"] img,
+html[data-theme="ht"] .insta-grid .ph { filter: url(#ht-filter); }
+html[data-theme="ht"] img, html[data-theme="ht"] .insta-grid .ph { mix-blend-mode: multiply; }
+html[data-theme="ht"] .insta-grid .ph { background: #cfcfcf; }
+html[data-theme="ht"] .site-header { background: var(--bg); border-bottom: 2px solid #111; }
+html[data-theme="ht"] .tile,
+html[data-theme="ht"] .panel:not(.profile-panel) { border: 2px solid #111; }
+html[data-theme="ht"] .icon-chip { background: var(--bg); border: 2px solid #111; }
+html[data-theme="ht"] .side .avatar,
+html[data-theme="ht"] .p-photo { border: 2px solid #111; }
+html[data-theme="ht"] .chips a { border-color: #111; }
+html[data-theme="ht"] a.w-row:hover, html[data-theme="ht"] button.w-row:hover,
+html[data-theme="ht"] a.w-row:focus-visible, html[data-theme="ht"] button.w-row:focus-visible {
+  background: radial-gradient(circle, rgba(17, 17, 17, .55) 1px, transparent 1.4px) 0 0 / 5px 5px;
+}
