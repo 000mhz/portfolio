@@ -59,7 +59,22 @@ function renderSide(site, current) {
     </div>
     ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
     ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
+    <div class="theme-dots" role="group" aria-label="Theme">
+      <button class="theme-dot dot-dark" type="button" data-theme="dark" title="Dark mode" aria-label="Dark mode"></button>
+      <button class="theme-dot dot-mac" type="button" data-theme="mac" title="Mac OS 8" aria-label="Mac OS 8"></button>
+    </div>
     ${footer}`;
+  // ドットを押すとその見た目に切り替え、もう一度押すと元（白）に戻る。選んだ見た目は全ページで保持
+  const dots = document.querySelectorAll(".theme-dot");
+  const sync = () => dots.forEach((d) => d.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === d.dataset.theme)));
+  dots.forEach((d) => d.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === d.dataset.theme ? "" : d.dataset.theme;
+    if (next) document.documentElement.dataset.theme = next;
+    else delete document.documentElement.dataset.theme;
+    try { next ? localStorage.setItem("theme", next) : localStorage.removeItem("theme"); } catch (_) {}
+    sync();
+  }));
+  sync();
   // スマホでは左カラムが上に来るので、コピーライトはページ最下部にも置いて切り替える
   $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer top-footer">${footer}</footer>`);
 }

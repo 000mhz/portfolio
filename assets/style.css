@@ -17,6 +17,9 @@
   --font: "Ibarra Real Nova", "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-gothic: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
   --header-h: 72px;
+  --rule: #000;
+  --list-ink: #000;
+  --hover: #fafafa;
   color-scheme: light;
 }
 
@@ -101,6 +104,13 @@ img { display: block; max-width: 100%; }
 .side .role { color: var(--sub); font-size: 16px; font-style: italic; margin-top: 6px; }
 .side .tagline { font-size: 15px; line-height: 1.8; letter-spacing: .24em; color: var(--ink); max-width: 32ch; }
 .side .loc { font-size: 14px; color: var(--muted); }
+/* theme dots (Top): dark mode / Mac OS 8 */
+.theme-dots { display: flex; gap: 14px; }
+.theme-dot { position: relative; width: 14px; height: 14px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; }
+.theme-dot::after { content: ""; position: absolute; inset: -8px; }
+.theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 3px; }
+.dot-dark { background: var(--ink); }
+.dot-mac { background: radial-gradient(circle at 35% 30%, #fff 0, #d4d4d4 40%, #8a8a8a 100%); box-shadow: inset 0 0 0 1px #555; }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
 .side-nav a {
@@ -235,7 +245,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   grid-template-columns: var(--w-cols);
   column-gap: 8px;
 }
-.w-rules i { display: block; height: 2px; background: #000; }
+.w-rules i { display: block; height: 2px; background: var(--rule); }
 .w-row {
   grid-template-rows: auto 1px;
   row-gap: 18px;
@@ -249,13 +259,13 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   text-align: left;
 }
 .w-row > span { grid-row: 1; }
-.w-row > i { grid-row: 2; align-self: stretch; height: 1px; background: #000; }
+.w-row > i { grid-row: 2; align-self: stretch; height: 1px; background: var(--rule); }
 a.w-row, button.w-row { cursor: pointer; }
 button.w-row { cursor: zoom-in; }
 .w-row { transition: background-color .2s ease; }
 .w-sub { margin-left: .5em; font-size: 13px; letter-spacing: .08em; }
-a.w-row:hover, button.w-row:hover, a.w-row:focus-visible, button.w-row:focus-visible { background: #fafafa; }
-.w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: #000; }
+a.w-row:hover, button.w-row:hover, a.w-row:focus-visible, button.w-row:focus-visible { background: var(--hover); }
+.w-year, .w-title, .w-cat { font-family: var(--font); font-weight: 400; color: var(--list-ink); }
 .w-year { font-size: 13px; font-variant-numeric: tabular-nums lining-nums; }
 .w-title { font-size: 22px; line-height: 1.3; overflow-wrap: anywhere; }
 .w-cat { font-size: 13px; font-style: italic; text-align: left; }
@@ -368,3 +378,121 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* ================= themes =================
+   Chosen with the dots on Top, kept in localStorage, applied to <html data-theme> before paint. */
+
+/* ---------- dark ---------- */
+html[data-theme="dark"] {
+  --bg: #121212;
+  --tile: #1a1a1a;
+  --ink: #ececec;
+  --sub: #a8a8a8;
+  --muted: #777;
+  --line: #2b2b2b;
+  --soft: #232323;
+  --shadow: none;
+  --shadow-hover: 0 12px 28px rgba(0, 0, 0, .5);
+  --rule: #ececec;
+  --list-ink: #ececec;
+  --hover: #1c1c1c;
+  color-scheme: dark;
+}
+
+/* ---------- Mac OS 8 (Platinum) ---------- */
+html[data-theme="mac"] {
+  --bg: #7072b4;
+  --tile: #dddddd;
+  --ink: #000;
+  --sub: #333;
+  --muted: #555;
+  --line: #a8a8a8;
+  --soft: #cfcfcf;
+  --shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999, 1px 1px 0 rgba(0, 0, 0, .55);
+  --shadow-hover: var(--shadow);
+  --radius: 0;
+  --radius-inner: 0;
+  --rule: #000;
+  --list-ink: #000;
+  --hover: #ccccff;
+  --font: "Geneva", "Osaka", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --header-h: 26px;
+}
+html[data-theme="mac"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(255, 255, 255, .16) 1px, transparent 1.2px);
+  background-size: 4px 4px;
+  -webkit-font-smoothing: auto;
+}
+html[data-theme="mac"] :focus-visible { outline: 2px solid #000; outline-offset: 1px; border-radius: 0; }
+/* menu bar */
+html[data-theme="mac"] .site-header { background: #dddddd; border-bottom: 1px solid #000; }
+html[data-theme="mac"] .site-header-in { padding: 0 14px; }
+html[data-theme="mac"] .site-name,
+html[data-theme="mac"] .side-nav a { font-family: var(--font-gothic); font-weight: 700; font-size: 13px; letter-spacing: 0; color: #000; line-height: var(--header-h); }
+html[data-theme="mac"] .side-nav { gap: 0; }
+html[data-theme="mac"] .side-nav a { padding: 0 10px; }
+html[data-theme="mac"] .side-nav a:hover,
+html[data-theme="mac"] .side-nav a[aria-current="page"] { background: #000; color: #fff; }
+/* windows: tiles, the left column, and the content of inner pages */
+html[data-theme="mac"] .tile,
+html[data-theme="mac"] .side,
+html[data-theme="mac"] body:not([data-page="top"]) #main {
+  border: 1px solid #000;
+  box-shadow: var(--shadow);
+  padding-top: 40px;
+}
+html[data-theme="mac"] .side,
+html[data-theme="mac"] body:not([data-page="top"]) #main { background: #fff; padding: 40px 22px 24px; }
+html[data-theme="mac"] body:not([data-page="top"]) #main { position: relative; }
+html[data-theme="mac"] .tile::before,
+html[data-theme="mac"] .side::before,
+html[data-theme="mac"] body:not([data-page="top"]) #main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 19px;
+  border-bottom: 1px solid #000;
+  background: repeating-linear-gradient(#999 0 1px, #f4f4f4 1px 2px) 24px 4px / calc(100% - 48px) 11px no-repeat, #dddddd;
+  z-index: 1;
+}
+html[data-theme="mac"] .tile::after,
+html[data-theme="mac"] .side::after,
+html[data-theme="mac"] body:not([data-page="top"]) #main::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #000;
+  background: #dddddd;
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
+  z-index: 2;
+}
+html[data-theme="mac"] a.tile:hover { transform: none; }
+html[data-theme="mac"] a.tile:active { background: #bbbbbb; }
+html[data-theme="mac"] .t-mv { padding: 20px 0 0; }
+html[data-theme="mac"] .t-works { padding-top: 34px; }
+html[data-theme="mac"] .icon-chip { background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
+html[data-theme="mac"] .insta-grid a,
+html[data-theme="mac"] .insta-grid .ph { background: #c4c4c4; box-shadow: inset 1px 1px 0 #888, inset -1px -1px 0 #fff; }
+html[data-theme="mac"] .side .avatar,
+html[data-theme="mac"] .p-photo { border-color: #000; }
+html[data-theme="mac"] .side h1,
+html[data-theme="mac"] .side .page-title,
+html[data-theme="mac"] .t-link h2,
+html[data-theme="mac"] .w-title,
+html[data-theme="mac"] .p-name { font-family: var(--font-gothic); font-weight: 700; letter-spacing: 0; }
+html[data-theme="mac"] .side h1,
+html[data-theme="mac"] .side .page-title { font-size: 22px; }
+html[data-theme="mac"] .t-link h2 { font-size: 20px; }
+html[data-theme="mac"] .w-title { font-size: 17px; }
+html[data-theme="mac"] .side .tagline { letter-spacing: .12em; }
+html[data-theme="mac"] .chips a { border-radius: 4px; border-color: #000; background: #dddddd; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
+html[data-theme="mac"] .site-footer { color: #fff; }
+html[data-theme="mac"] .side .site-footer { color: var(--muted); }
+html[data-theme="mac"] .w-tabs button { letter-spacing: 0; }
+html[data-theme="mac"] .w-tabs button[aria-current="true"] { background: #000; color: #fff; padding: 0 6px; }
