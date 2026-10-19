@@ -104,15 +104,13 @@ img { display: block; max-width: 100%; }
 .side .role { color: var(--sub); font-size: 16px; font-style: italic; margin-top: 6px; }
 .side .tagline { font-size: 15px; line-height: 1.8; letter-spacing: .24em; color: var(--ink); max-width: 32ch; }
 .side .loc { font-size: 14px; color: var(--muted); }
-/* theme dots (Top): dark mode / Mac OS 8 */
-.theme-dots { display: flex; gap: 14px; }
-.theme-dot { position: relative; width: 14px; height: 14px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; }
-.theme-dot::after { content: ""; position: absolute; inset: -8px; }
-.theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 3px; }
-.dot-default { background: #fff; box-shadow: inset 0 0 0 1px #161616; }
-.dot-dark { background: #161616; box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); }
-.dot-win { background: #008080; box-shadow: inset 1px 1px 0 #5fc4c4, inset -1px -1px 0 #003c3c, 0 0 0 1px #000; }
-.dot-mac { background: radial-gradient(circle at 35% 30%, #fff 0, #d4d4d4 40%, #8a8a8a 100%); box-shadow: inset 0 0 0 1px #555; }
+/* theme icons (Top): default / dark / Mac OS 8 / Windows 95 */
+.theme-dots { display: flex; gap: 12px; align-items: center; }
+.theme-dot { position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: none; cursor: pointer; transition: transform .15s ease; }
+.theme-dot svg { width: 22px; height: 22px; display: block; }
+.theme-dot:hover { transform: translateY(-2px); }
+.theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 1px; }
+html[data-theme="dark"] .dot-default svg, html[data-theme="dark"] .dot-mac svg, html[data-theme="dark"] .dot-win svg { filter: drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff); }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
 .side-nav a {
