@@ -20,6 +20,18 @@ const ICONS = {
   image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l4.5-4.5 3.5 3.5 2.5-2.5L20 19"/></svg>',
   link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
 };
+// メールアドレスは迷惑メール対策のため、ファイルには逆順＋Base64で保存し、表示時にだけ組み立てる
+const decodeMail = (v) => { try { return atob(v).split("").reverse().join(""); } catch (_) { return ""; } };
+const linkAttrs = (s) => s.mail
+  ? `href="#" data-mail="${esc(s.mail)}"`
+  : `href="${esc(s.url)}" target="_blank" rel="noopener"`;
+function wireMail(root = document) {
+  root.querySelectorAll("[data-mail]").forEach((a) => {
+    const addr = decodeMail(a.dataset.mail);
+    a.querySelectorAll(".js-mail").forEach((el) => (el.textContent = addr));
+    a.addEventListener("click", (e) => { e.preventDefault(); location.href = "mailto:" + addr; });
+  });
+}
 const iconFor = (s) => ICONS[(s.icon || s.label || "").toLowerCase()] || ICONS.link;
 
 function renderSide(site, current) {
@@ -132,9 +144,9 @@ async function renderTop(site) {
   const snsTiles = sns
     .map((s, i) => {
       const wide = sns.length % 2 === 1 && i === sns.length - 1 ? " w2" : "";
-      return `<a class="tile t-sns${wide}" data-title="${esc(s.label)}" href="${esc(s.url)}" target="_blank" rel="noopener">
+      return `<a class="tile t-sns${wide}" data-title="${esc(s.label)}" ${linkAttrs(s)}>
         <span class="icon-chip">${iconFor(s)}</span><span class="arrow">↗</span>
-        <span class="bottom"><span class="name">${esc(s.label)}</span><br><span class="handle">${esc(s.handle || "")}</span></span>
+        <span class="bottom"><span class="name">${esc(s.label)}</span><br><span class="handle${s.mail ? " js-mail" : ""}">${esc(s.handle || "")}</span></span>
       </a>`;
     })
     .join("");
@@ -165,6 +177,7 @@ async function renderTop(site) {
       </a>
     </div>`;
 
+  wireMail($("#main"));
   const posts = await loadInstagram(ig);
   const head = document.querySelector(".t-insta .head");
   if (head && ig.profileUrl) head.href = ig.profileUrl;
@@ -202,7 +215,7 @@ async function renderProfile(site) {
       ${block("ja", p.ja)}
       ${block("en", p.en)}
       <section class="profile-contact"><h2>Contact</h2><div class="chips">${(site.sns || [])
-        .map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`)
+        .map((s) => `<a ${linkAttrs(s)}>${esc(s.label)} ↗</a>`)
         .join("")}</div></section>
     </div>`;
 }
@@ -288,4 +301,5 @@ async function renderWorks(site) {
   renderSide(site, page);
   const render = { top: renderTop, profile: renderProfile, works: renderWorks }[page];
   if (render) await render(site);
+  if (page === "profile") wireMail($("#main"));
 })();
