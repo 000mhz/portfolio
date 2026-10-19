@@ -67,9 +67,6 @@ function renderSide(site, current) {
       <button class="theme-dot dot-dark" type="button" data-theme="dark" title="Dark mode" aria-label="Dark mode"></button>
       <button class="theme-dot dot-mac" type="button" data-theme="mac" title="Mac OS 8" aria-label="Mac OS 8"></button>
       <button class="theme-dot dot-win" type="button" data-theme="win" title="Windows 95" aria-label="Windows 95"></button>
-      <button class="theme-dot dot-gb" type="button" data-theme="gb" title="Game Boy" aria-label="Game Boy"></button>
-      <button class="theme-dot dot-sfc" type="button" data-theme="sfc" title="Super Famicom" aria-label="Super Famicom"></button>
-      <button class="theme-dot dot-ht" type="button" data-theme="ht" title="Halftone" aria-label="Halftone"></button>
     </div>
     ${footer}`;
   // ドットを押すとその見た目に切り替え（いちばん左が元の白）。選んだ見た目は全ページで保持
