@@ -90,6 +90,11 @@ async function loadInstagram(cfg) {
     try {
       const data = await (await fetch(cfg.feedUrl)).json();
       const posts = Array.isArray(data) ? data : data.posts || [];
+      // フィードにユーザー名があれば、タイルの表示とリンク先に使う
+      if (data.username) {
+        cfg.handle = "@" + data.username;
+        cfg.profileUrl = "https://www.instagram.com/" + data.username + "/";
+      }
       return posts.slice(0, count).map((p) => ({
         image:
           (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) ||
@@ -161,6 +166,10 @@ async function renderTop(site) {
     </div>`;
 
   const posts = await loadInstagram(ig);
+  const head = document.querySelector(".t-insta .head");
+  if (head && ig.profileUrl) head.href = ig.profileUrl;
+  const h = document.querySelector(".t-insta .head .handle");
+  if (h && ig.handle) h.textContent = ig.handle + " ↗";
   const n = ig.count || 4;
   const cells = [];
   for (let i = 0; i < n; i++) {
