@@ -63,6 +63,7 @@ function renderSide(site, current) {
     ${site.tagline ? `<p class="tagline">${esc(site.tagline)}</p>` : ""}
     ${site.location ? `<p class="loc">${esc(site.location)}</p>` : ""}
     <div class="theme-dots" role="group" aria-label="Theme">
+      <button class="theme-dot dot-default" type="button" data-theme="" title="Default" aria-label="Default"></button>
       <button class="theme-dot dot-dark" type="button" data-theme="dark" title="Dark mode" aria-label="Dark mode"></button>
       <button class="theme-dot dot-mac" type="button" data-theme="mac" title="Mac OS 8" aria-label="Mac OS 8"></button>
       <button class="theme-dot dot-win" type="button" data-theme="win" title="Windows 95" aria-label="Windows 95"></button>
@@ -70,11 +71,11 @@ function renderSide(site, current) {
       <button class="theme-dot dot-sfc" type="button" data-theme="sfc" title="Super Famicom" aria-label="Super Famicom"></button>
     </div>
     ${footer}`;
-  // ドットを押すとその見た目に切り替え、もう一度押すと元（白）に戻る。選んだ見た目は全ページで保持
+  // ドットを押すとその見た目に切り替え（いちばん左が元の白）。選んだ見た目は全ページで保持
   const dots = document.querySelectorAll(".theme-dot");
-  const sync = () => dots.forEach((d) => d.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === d.dataset.theme)));
+  const sync = () => dots.forEach((d) => d.setAttribute("aria-pressed", String((document.documentElement.dataset.theme || "") === d.dataset.theme)));
   dots.forEach((d) => d.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === d.dataset.theme ? "" : d.dataset.theme;
+    const next = d.dataset.theme;
     if (window.applyTheme) window.applyTheme(next);
     else if (next) document.documentElement.dataset.theme = next;
     else delete document.documentElement.dataset.theme;

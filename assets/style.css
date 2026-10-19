@@ -109,7 +109,8 @@ img { display: block; max-width: 100%; }
 .theme-dot { position: relative; width: 14px; height: 14px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; }
 .theme-dot::after { content: ""; position: absolute; inset: -8px; }
 .theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 3px; }
-.dot-dark { background: var(--ink); }
+.dot-default { background: #fff; box-shadow: inset 0 0 0 1px #161616; }
+.dot-dark { background: #161616; box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); }
 .dot-win { background: #008080; box-shadow: inset 1px 1px 0 #5fc4c4, inset -1px -1px 0 #003c3c, 0 0 0 1px #000; }
 .dot-gb { background: #9bbc0f; box-shadow: inset 0 0 0 3px #306230; border-radius: 0; }
 .dot-sfc { background: conic-gradient(#e60012 0 25%, #f5b800 0 50%, #13a538 0 75%, #2a7de1 0); }
