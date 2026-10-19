@@ -5,8 +5,8 @@
   --bg: #ffffff;
   --tile: #ffffff;
   --ink: #161616;
-  --sub: #6f6f6f;
-  --muted: #9a9a9a;
+  --sub: #5c5c5c;
+  --muted: #737373;
   --line: #ececec;
   --soft: #f5f5f4;
   --shadow: 0 2px 4px rgba(0, 0, 0, .03), 0 1px 1px rgba(0, 0, 0, .02);
@@ -390,7 +390,7 @@ html[data-theme="dark"] {
   --tile: #1a1a1a;
   --ink: #ececec;
   --sub: #a8a8a8;
-  --muted: #777;
+  --muted: #8f8f8f;
   --line: #2b2b2b;
   --soft: #232323;
   --shadow: none;
