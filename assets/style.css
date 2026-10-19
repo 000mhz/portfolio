@@ -110,6 +110,7 @@ img { display: block; max-width: 100%; }
 .theme-dot::after { content: ""; position: absolute; inset: -8px; }
 .theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 3px; }
 .dot-dark { background: var(--ink); }
+.dot-win { background: #008080; box-shadow: inset 1px 1px 0 #5fc4c4, inset -1px -1px 0 #003c3c, 0 0 0 1px #000; }
 .dot-mac { background: radial-gradient(circle at 35% 30%, #fff 0, #d4d4d4 40%, #8a8a8a 100%); box-shadow: inset 0 0 0 1px #555; }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
@@ -496,3 +497,123 @@ html[data-theme="mac"] .site-footer { color: #fff; }
 html[data-theme="mac"] .side .site-footer { color: var(--muted); }
 html[data-theme="mac"] .w-tabs button { letter-spacing: 0; }
 html[data-theme="mac"] .w-tabs button[aria-current="true"] { background: #000; color: #fff; padding: 0 6px; }
+
+/* ---------- Windows 95 ---------- */
+html[data-theme="win"] {
+  --bg: #008080;
+  --tile: #c0c0c0;
+  --ink: #000;
+  --sub: #222;
+  --muted: #444;
+  --line: #808080;
+  --soft: #c0c0c0;
+  --out: inset -1px -1px 0 #000, inset 1px 1px 0 #fff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf;
+  --in: inset -1px -1px 0 #fff, inset 1px 1px 0 #808080, inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #000;
+  --shadow: var(--out);
+  --shadow-hover: var(--out);
+  --radius: 0;
+  --radius-inner: 0;
+  --rule: #000;
+  --list-ink: #000;
+  --hover: #000080;
+  --font: "MS PGothic", "MS UI Gothic", Tahoma, "Hiragino Sans", "Yu Gothic", sans-serif;
+  --header-h: 30px;
+}
+html[data-theme="win"] body { -webkit-font-smoothing: none; }
+html[data-theme="win"] :focus-visible { outline: 1px dotted #000; outline-offset: -4px; border-radius: 0; }
+/* taskbar at the bottom */
+html[data-theme="win"] .site-header { top: auto; bottom: 0; padding: 0 0 env(safe-area-inset-bottom, 0px); background: #c0c0c0; box-shadow: inset 0 1px 0 #dfdfdf, inset 0 2px 0 #fff; }
+html[data-theme="win"] .site-header-in { max-width: none; padding: 0 3px; justify-content: flex-start; gap: 6px; }
+html[data-theme="win"] .site-name,
+html[data-theme="win"] .side-nav a {
+  font-family: var(--font); font-weight: 700; font-size: 12px; letter-spacing: 0; line-height: 22px; color: #000;
+  padding: 0 10px; background: #c0c0c0; box-shadow: var(--out);
+}
+html[data-theme="win"] .side-nav { gap: 3px; flex-wrap: nowrap; justify-content: flex-start; padding-left: 6px; border-left: 1px solid #808080; box-shadow: 1px 0 0 #fff inset; }
+html[data-theme="win"] .side-nav a { min-width: 72px; font-weight: 400; }
+html[data-theme="win"] .side-nav a[aria-current="page"] {
+  box-shadow: var(--in); font-weight: 700;
+  background: repeating-conic-gradient(#fff 0 25%, #c0c0c0 0 50%) 0 0 / 2px 2px;
+}
+html[data-theme="win"] .side-nav a:active, html[data-theme="win"] .site-name:active { box-shadow: var(--in); }
+html[data-theme="win"] .layout { padding-top: 16px; padding-bottom: calc(var(--header-h) + 24px); }
+html[data-theme="win"] .side { top: 16px; }
+/* windows */
+html[data-theme="win"] .tile,
+html[data-theme="win"] .side,
+html[data-theme="win"] body:not([data-page="top"]) #main {
+  border: 0;
+  background: #c0c0c0;
+  box-shadow: var(--out);
+  padding-top: 32px;
+}
+html[data-theme="win"] .side,
+html[data-theme="win"] body:not([data-page="top"]) #main { padding: 30px 20px 22px; }
+html[data-theme="win"] body:not([data-page="top"]) #main { position: relative; }
+html[data-theme="win"] body:not([data-page="top"]) #main > * { position: relative; }
+html[data-theme="win"] .tile::before,
+html[data-theme="win"] .side::before,
+html[data-theme="win"] body:not([data-page="top"]) #main::before {
+  content: attr(data-title);
+  position: absolute;
+  top: 3px; left: 3px; right: 3px;
+  height: 18px;
+  padding: 0 28px 0 6px;
+  background: #000080;
+  color: #fff;
+  font: 700 12px/18px var(--font);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  z-index: 1;
+}
+html[data-theme="win"] .tile::after,
+html[data-theme="win"] .side::after,
+html[data-theme="win"] body:not([data-page="top"]) #main::after {
+  content: "×";
+  position: absolute;
+  top: 5px; right: 5px;
+  width: 16px; height: 14px;
+  background: #c0c0c0;
+  box-shadow: var(--out);
+  color: #000;
+  font: 700 13px/13px Tahoma, sans-serif;
+  text-align: center;
+  z-index: 2;
+}
+html[data-theme="win"] a.tile:hover { transform: none; }
+html[data-theme="win"] a.tile:active { box-shadow: var(--in); }
+html[data-theme="win"] .t-mv { padding: 24px 3px 3px; }
+html[data-theme="win"] .t-works { padding-top: 30px; }
+html[data-theme="win"] .icon-chip { background: #c0c0c0; border: 0; box-shadow: var(--out); }
+html[data-theme="win"] .insta-grid a,
+html[data-theme="win"] .insta-grid .ph { background: #fff; box-shadow: var(--in); }
+html[data-theme="win"] .side .avatar,
+html[data-theme="win"] .p-photo { border: 0; box-shadow: 0 0 0 2px #808080, 0 0 0 3px #fff; }
+html[data-theme="win"] .side h1,
+html[data-theme="win"] .side .page-title,
+html[data-theme="win"] .t-link h2,
+html[data-theme="win"] .w-title,
+html[data-theme="win"] .p-name { font-family: var(--font); font-weight: 700; letter-spacing: 0; }
+html[data-theme="win"] .side h1,
+html[data-theme="win"] .side .page-title { font-size: 22px; }
+html[data-theme="win"] .t-link h2 { font-size: 20px; }
+html[data-theme="win"] .w-title { font-size: 17px; }
+html[data-theme="win"] .side .tagline { letter-spacing: .12em; }
+html[data-theme="win"] .chips a { border: 0; border-radius: 0; background: #c0c0c0; box-shadow: var(--out); }
+html[data-theme="win"] .chips a:active { box-shadow: var(--in); }
+html[data-theme="win"] .site-footer { color: #fff; }
+html[data-theme="win"] .side .site-footer { color: var(--muted); }
+/* Studies: white list box inside the window, navy selection */
+html[data-theme="win"] .w-list { background: #fff; box-shadow: var(--in); padding: 4px 8px 8px; }
+html[data-theme="win"] a.w-row:hover .w-year, html[data-theme="win"] a.w-row:hover .w-title, html[data-theme="win"] a.w-row:hover .w-cat,
+html[data-theme="win"] a.w-row:focus-visible .w-year, html[data-theme="win"] a.w-row:focus-visible .w-title, html[data-theme="win"] a.w-row:focus-visible .w-cat,
+html[data-theme="win"] button.w-row:hover .w-year, html[data-theme="win"] button.w-row:hover .w-title, html[data-theme="win"] button.w-row:hover .w-cat { color: #fff; }
+html[data-theme="win"] .w-tabs { gap: 0; margin-bottom: -2px; position: relative; z-index: 1; }
+html[data-theme="win"] .w-tabs button { font-family: var(--font); font-weight: 400; font-size: 12px; letter-spacing: 0; padding: 2px 12px; background: #c0c0c0; box-shadow: inset 1px 1px 0 #fff, inset -1px 0 0 #000, inset -2px 0 0 #808080; }
+html[data-theme="win"] .w-tabs button[aria-current="true"] { font-weight: 700; padding-top: 4px; margin-top: -2px; }
+html[data-theme="win"] .profile-panel { background: #fff; box-shadow: var(--in); padding: 20px; max-width: none; }
+/* window chrome needs the left column to be a positioning box where it isn't sticky (Top on PC, all phones) */
+html[data-theme="mac"] body[data-page="top"] .side,
+html[data-theme="win"] body[data-page="top"] .side { position: relative; top: 0; }
+@media (max-width: 960px) {
+  html[data-theme="mac"] .side, html[data-theme="win"] .side { position: relative; top: 0; }
+}

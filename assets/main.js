@@ -48,9 +48,12 @@ function renderSide(site, current) {
     const titles = { profile: "Profile", works: "Studies", members: "Members" };
     $("#side").classList.add("is-compact");
     $("#side").innerHTML = `<h1 class="page-title">${titles[current] || ""}</h1>`;
+    $("#side").dataset.title = titles[current] || "";
+    $("#main").dataset.title = titles[current] || "";
     $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer">${footer}</footer>`);
     return;
   }
+  $("#side").dataset.title = site.name || "";
   $("#side").innerHTML = `
     ${p.photo ? `<img class="avatar" src="${esc(src(p.photo))}" alt="${esc(site.name)}">` : `<span class="avatar avatar-empty" aria-hidden="true">${ICONS.image}</span>`}
     <div>
@@ -62,6 +65,7 @@ function renderSide(site, current) {
     <div class="theme-dots" role="group" aria-label="Theme">
       <button class="theme-dot dot-dark" type="button" data-theme="dark" title="Dark mode" aria-label="Dark mode"></button>
       <button class="theme-dot dot-mac" type="button" data-theme="mac" title="Mac OS 8" aria-label="Mac OS 8"></button>
+      <button class="theme-dot dot-win" type="button" data-theme="win" title="Windows 95" aria-label="Windows 95"></button>
     </div>
     ${footer}`;
   // ドットを押すとその見た目に切り替え、もう一度押すと元（白）に戻る。選んだ見た目は全ページで保持
@@ -122,7 +126,7 @@ async function renderTop(site) {
   const snsTiles = sns
     .map((s, i) => {
       const wide = sns.length % 2 === 1 && i === sns.length - 1 ? " w2" : "";
-      return `<a class="tile t-sns${wide}" href="${esc(s.url)}" target="_blank" rel="noopener">
+      return `<a class="tile t-sns${wide}" data-title="${esc(s.label)}" href="${esc(s.url)}" target="_blank" rel="noopener">
         <span class="icon-chip">${iconFor(s)}</span><span class="arrow">↗</span>
         <span class="bottom"><span class="name">${esc(s.label)}</span><br><span class="handle">${esc(s.handle || "")}</span></span>
       </a>`;
@@ -136,8 +140,8 @@ async function renderTop(site) {
 
   $("#main").innerHTML = `
     <div class="bento">
-      ${mv ? `<div class="tile t-mv w4 h2"><img src="${esc(src(mv.image))}" alt="${esc(mv.title)}"></div>` : ""}
-      <section class="tile t-insta w2 h2">
+      ${mv ? `<div class="tile t-mv w4 h2" data-title="${esc(mv.title)}${mv.subtitle ? " " + esc(mv.subtitle) : ""}"><img src="${esc(src(mv.image))}" alt="${esc(mv.title)}"></div>` : ""}
+      <section class="tile t-insta w2 h2" data-title="Instagram">
         <a class="head" href="${esc(ig.profileUrl || "#")}" target="_blank" rel="noopener">
           <span class="icon-chip">${ICONS.instagram}</span>
           <span class="name">Instagram</span>
@@ -146,10 +150,10 @@ async function renderTop(site) {
         <div class="insta-grid" id="insta-grid"></div>
       </section>
       ${snsTiles}
-      <a class="tile t-link w2" href="${pageUrl("profile")}">
+      <a class="tile t-link w2" data-title="Profile" href="${pageUrl("profile")}">
         <span class="arrow">→</span><h2>Profile</h2><p>About me</p>
       </a>
-      <a class="tile t-link t-works w4" href="${pageUrl("works")}">
+      <a class="tile t-link t-works w4" data-title="Studies" href="${pageUrl("works")}">
         <span class="text"><span class="arrow">→</span><h2>Studies</h2><p>${works.length} pieces</p></span>
         <span class="thumbs">${thumbs}</span>
       </a>

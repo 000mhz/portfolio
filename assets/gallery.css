@@ -162,3 +162,4 @@ body.ui-light .g-close svg { filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .3)); }
 /* themes */
 html[data-theme="dark"] .g-ui { --seg-track: rgba(255, 255, 255, .2); }
 html[data-theme="mac"] .g-ui { --seg-track: rgba(0, 0, 0, .25); }
+html[data-theme="win"] .g-ui { --seg-track: rgba(0, 0, 0, .25); }
