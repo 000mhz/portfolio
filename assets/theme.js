@@ -2,11 +2,13 @@
 // 選択はこのブラウザの localStorage に保存（使えない環境では毎回白に戻るだけ）。
 (function () {
   var d = document.documentElement;
-  // 網点1マス（6px）：中心が黒、外側ほど白のグラデーション
+  // 網点1マスの大きさ（px）。小さいほど細かく、元の絵がわかりやすい
+  var HT = 3;
+  // 網点1マス：中心が黒、外側ほど白のグラデーション
   var HT_CELL = "data:image/svg+xml," + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6"><defs><radialGradient id="g" r=".72">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + HT + '" height="' + HT + '"><defs><radialGradient id="g" r=".72">' +
     '<stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient></defs>' +
-    '<rect width="6" height="6" fill="url(#g)"/></svg>');
+    '<rect width="' + HT + '" height="' + HT + '" fill="url(#g)"/></svg>');
   var PIXEL_FONT = "https://fonts.googleapis.com/css2?family=DotGothic16&display=swap";
   function loadFont(t) {
     if ((t === "gb" || t === "sfc") && !document.getElementById("pixel-font")) {
@@ -40,7 +42,7 @@
       // ハーフトーン：明るさに応じて大きさの変わる網点（白黒）に置き換える
       '<filter id="ht-filter" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">' +
       '<feColorMatrix in="SourceGraphic" type="matrix" values=".299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0" result="gray"/>' +
-      '<feImage width="6" height="6" result="cell" href="' + HT_CELL + '"/>' +
+      '<feImage width="' + HT + '" height="' + HT + '" result="cell" href="' + HT_CELL + '"/>' +
       '<feTile in="cell"/>' +
       // 網点の面積が明るさに比例するように補正（中心からの距離²）
       '<feComponentTransfer result="cells">' +
@@ -48,7 +50,9 @@
       '<feFuncG type="table" tableValues="0 .016 .064 .145 .258 .403 .58 .79 1 1 1"/>' +
       '<feFuncB type="table" tableValues="0 .016 .064 .145 .258 .403 .58 .79 1 1 1"/>' +
       '</feComponentTransfer>' +
-      '<feGaussianBlur in="gray" stdDeviation=".7" result="soft"/>' +
+      // 暗い画像がつぶれないよう中間調を持ち上げる
+      '<feComponentTransfer in="gray" result="lift"><feFuncR type="gamma" exponent=".6"/><feFuncG type="gamma" exponent=".6"/><feFuncB type="gamma" exponent=".6"/></feComponentTransfer>' +
+      '<feGaussianBlur in="lift" stdDeviation=".45" result="soft"/>' +
       '<feComposite in="soft" in2="cells" operator="arithmetic" k2="1" k3="1" k4="-.5"/>' +
       '<feComponentTransfer>' +
       '<feFuncR type="discrete" tableValues="0 1"/><feFuncG type="discrete" tableValues="0 1"/><feFuncB type="discrete" tableValues="0 1"/>' +
