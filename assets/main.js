@@ -305,12 +305,12 @@ async function renderWorks(site) {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) close(); });
 }
 
-// Logos of 365：ロゴを正方形のグリッドに並べ、クリックで原寸（800×300）を表示。←→で前後、Escで閉じる
+// Logos of 365：ロゴを正方形のグリッドに並べ、クリックで大きく表示。←→で前後、Escで閉じる
 async function renderLogos() {
   const logos = await getJSON("data/logos365.json");
   $("#main").innerHTML = `
     <ol class="logo-grid">${logos.map((l, i) => `<li><button type="button" class="logo-cell" data-i="${i}" aria-label="No. ${l.n}">
-      <img src="${src("images/logos365/thumb/" + l.n + ".webp")}" alt="" loading="lazy" width="360" height="360"><span>${l.n}</span></button></li>`).join("")}</ol>
+      <img src="${src("images/logos365/thumb/" + l.n + ".webp")}" alt="" loading="lazy" width="560" height="560"><span>${l.n}</span></button></li>`).join("")}</ol>
     <div class="lightbox logo-lb" id="lightbox" hidden>
       <button class="lb-close" type="button" aria-label="閉じる">×</button>
       <img alt="">
@@ -321,7 +321,7 @@ async function renderLogos() {
   const show = (i) => {
     cur = (i + logos.length) % logos.length;
     const l = logos[cur];
-    img.src = src("images/logos365/full/" + l.n + ".webp");
+    img.src = src("images/logos365/thumb/" + l.n + ".webp");
     img.alt = "Logo No. " + l.n;
     cap.textContent = "No. " + l.n + " / 365";
   };

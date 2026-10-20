@@ -277,7 +277,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .logo-cell img { width: 100%; height: auto; aspect-ratio: 1; mix-blend-mode: multiply; transition: transform .25s ease; }
 .logo-cell:hover img { transform: scale(1.06); }
 .logo-cell span { position: absolute; left: 7px; bottom: 4px; font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums lining-nums; }
-.logo-lb img { width: min(800px, 100%); max-height: calc(100% - 60px); background: #fff; }
+.logo-lb img { width: min(560px, 100%); max-height: calc(100% - 60px); aspect-ratio: 1; object-fit: contain; background: #fff; }
 html[data-theme="dark"] .logo-cell { background: #fff; filter: invert(1); box-shadow: none; }
 html[data-theme="dark"] .logo-cell span { color: #707070; }
 html[data-theme="dark"] .logo-lb img { filter: invert(1); }
