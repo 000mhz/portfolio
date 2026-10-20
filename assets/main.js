@@ -139,15 +139,17 @@ async function renderTop(site) {
   let mv = null;
   for (const w of pool) if (await isWide(src(w.image))) { mv = w; break; }
   const ig = site.instagram || {};
-  const sns = (site.sns || []).filter((s) => (s.icon || s.label || "").toLowerCase() !== "instagram");
+  // "top": false のものはトップに出さない（プロフィールのContactには出る）
+  const sns = (site.sns || []).filter((s) => (s.icon || s.label || "").toLowerCase() !== "instagram" && s.top !== false);
 
   // 「Now」タイル（時刻・天気／オーロラ／月）はSNSタイルと同じ1マスに並べる
-  const nowTile = `<section class="tile t-now" data-title="Now" aria-label="Now">
-      <div class="now-row"><span class="now-k">Kanagawa</span><span class="now-v"><b id="now-time">—</b> <span id="now-wx"></span></span></div>
-      <div class="now-row"><span class="now-k">Aurora <span id="now-kp-note"></span></span><span class="now-v">Kp <b id="now-kp">—</b> <svg id="now-kp-spark" class="now-spark" aria-hidden="true"></svg></span></div>
-      <div class="now-row"><span class="now-k">Moon <span id="now-moon-name"></span></span><span class="now-v"><svg id="now-moon" class="now-moon" viewBox="0 0 16 16" aria-hidden="true"></svg> <b id="now-moon-age">—</b> days</span></div>
-    </section>`;
   const small = sns.length + 1;
+  const nowWide = small % 2 === 1 && sns.length === 0;
+  const nowTile = `<section class="tile t-now${nowWide ? " w2 is-wide" : ""}" data-title="Now" aria-label="Now">
+      <div class="now-row"><span class="now-k">Kanagawa</span><span class="now-big"><b id="now-time">—</b></span><span class="now-sub" id="now-wx"></span></div>
+      <div class="now-row"><span class="now-k">Aurora</span><span class="now-big"><small>Kp</small> <b id="now-kp">—</b></span><span class="now-sub"><span id="now-kp-note"></span><svg id="now-kp-spark" class="now-spark" aria-hidden="true"></svg></span></div>
+      <div class="now-row"><span class="now-k">Moon</span><span class="now-big"><svg id="now-moon" class="now-moon" viewBox="0 0 16 16" aria-hidden="true"></svg><b id="now-moon-age">—</b> <small>days</small></span><span class="now-sub" id="now-moon-name"></span></div>
+    </section>`;
   const snsTiles = sns
     .map((s, i) => {
       const wide = small % 2 === 1 && i === sns.length - 1 ? " w2" : "";
