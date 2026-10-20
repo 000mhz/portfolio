@@ -41,7 +41,7 @@ function renderSide(site, current) {
     ["Studies", "works", "works"],
   ]
     .map(([label, dir, key]) =>
-      `<a href="${pageUrl(dir)}"${key === current ? ' aria-current="page"' : ""}>${label}</a>`)
+      `<a href="${pageUrl(dir)}"${key === (current === "logos" ? "works" : current) ? ' aria-current="page"' : ""}>${label}</a>`)
     .join("");
   const p = site.profile || {};
   const footer = `<p class="site-footer">© ${new Date().getFullYear()} ${esc(site.siteName || site.name)}</p>`;
@@ -57,9 +57,10 @@ function renderSide(site, current) {
 
   // Top以外のページは左カラムを空にして、中身の位置だけTopとそろえる
   if (current !== "top") {
-    const titles = { profile: "Profile", works: "Studies", members: "Members" };
+    const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365" };
     $("#side").classList.add("is-compact");
-    $("#side").innerHTML = `<h1 class="page-title">${titles[current] || ""}</h1>`;
+    $("#side").innerHTML = `<h1 class="page-title">${titles[current] || ""}</h1>` +
+      (current === "logos" ? `<p class="page-meta">2013 · <i>Graphic Design</i><br>365 logos, one a day</p><a class="page-back" href="${pageUrl("works")}">← Studies</a>` : "");
     $("#side").dataset.title = titles[current] || "";
     $("#main").dataset.title = titles[current] || "";
     $(".layout").insertAdjacentHTML("beforeend", `<footer class="page-footer">${footer}</footer>`);
@@ -304,13 +305,51 @@ async function renderWorks(site) {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) close(); });
 }
 
+// Logos of 365：ロゴを正方形のグリッドに並べ、クリックで原寸（800×300）を表示。←→で前後、Escで閉じる
+async function renderLogos() {
+  const logos = await getJSON("data/logos365.json");
+  $("#main").innerHTML = `
+    <ol class="logo-grid">${logos.map((l, i) => `<li><button type="button" class="logo-cell" data-i="${i}" aria-label="No. ${l.n}">
+      <img src="${src("images/logos365/thumb/" + l.n + ".webp")}" alt="" loading="lazy" width="360" height="360"><span>${l.n}</span></button></li>`).join("")}</ol>
+    <div class="lightbox logo-lb" id="lightbox" hidden>
+      <button class="lb-close" type="button" aria-label="閉じる">×</button>
+      <img alt="">
+      <p class="lb-cap"></p>
+    </div>`;
+  const lb = $("#lightbox"), img = lb.querySelector("img"), cap = lb.querySelector(".lb-cap");
+  let cur = 0;
+  const show = (i) => {
+    cur = (i + logos.length) % logos.length;
+    const l = logos[cur];
+    img.src = src("images/logos365/full/" + l.n + ".webp");
+    img.alt = "Logo No. " + l.n;
+    cap.textContent = "No. " + l.n + " / 365";
+  };
+  const close = () => { lb.hidden = true; document.body.style.overflow = ""; };
+  $(".logo-grid").addEventListener("click", (e) => {
+    const b = e.target.closest(".logo-cell");
+    if (!b) return;
+    show(+b.dataset.i);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lb.querySelector(".lb-close").focus();
+  });
+  lb.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") show(cur + 1);
+    if (e.key === "ArrowLeft") show(cur - 1);
+  });
+}
+
 (async () => {
   const page = document.body.dataset.page;
   const site = await getJSON("data/site.json");
-  const titles = { profile: "Profile", works: "Studies", members: "Members" };
+  const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365" };
   document.title = page === "top" ? site.siteName || site.name : `${titles[page] || page} — ${site.siteName || site.name}`;
   renderSide(site, page);
-  const render = { top: renderTop, profile: renderProfile, works: renderWorks }[page];
+  const render = { top: renderTop, profile: renderProfile, works: renderWorks, logos: renderLogos }[page];
   if (render) await render(site);
   if (page === "profile") wireMail($("#main"));
 })();

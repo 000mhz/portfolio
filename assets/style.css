@@ -264,6 +264,27 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   transition: color .2s;
 }
 .w-tabs button:hover, .w-tabs button[aria-current="true"] { color: var(--ink); }
+/* Logos of 365: square grid of marks */
+.page-meta { font-size: 14px; color: var(--sub); line-height: 1.7; }
+.page-back { font-size: 13px; color: var(--muted); }
+.page-back:hover { color: var(--ink); }
+.logo-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 8px; }
+.logo-cell {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in;
+  background: #fff; border-radius: var(--radius-inner); overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.logo-cell img { width: 100%; height: auto; aspect-ratio: 1; mix-blend-mode: multiply; transition: transform .25s ease; }
+.logo-cell:hover img { transform: scale(1.06); }
+.logo-cell span { position: absolute; left: 7px; bottom: 4px; font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums lining-nums; }
+.logo-lb img { width: min(800px, 100%); max-height: calc(100% - 60px); background: #fff; }
+html[data-theme="dark"] .logo-cell { background: #fff; filter: invert(1); box-shadow: none; }
+html[data-theme="dark"] .logo-cell span { color: #707070; }
+html[data-theme="dark"] .logo-lb img { filter: invert(1); }
+html[data-theme="win"] .logo-cell, html[data-theme="mac"] .logo-cell { border-radius: 0; }
+html[data-theme="win"] .logo-cell { box-shadow: var(--in); }
+@media (max-width: 640px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; } }
+
 /* works list: year · title · category */
 /* rules are drawn per cell, with an 8px gap between columns */
 .w-list { list-style: none; --w-cols: 64px minmax(0, 1fr) 140px; }
