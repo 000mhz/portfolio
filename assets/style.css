@@ -405,6 +405,15 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .side-nav { gap: 4px 16px; }
   .side .avatar { width: 112px; height: 112px; }
   .page-footer { grid-column: auto; }
+  /* Top on phones/tablets: portrait on the left, name and the rest beside it */
+  body[data-page="top"] .side { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 20px; row-gap: 10px; align-items: start; }
+  body[data-page="top"] .side > .avatar { grid-row: 1 / span 5; align-self: start; }
+  body[data-page="top"] .side > :not(.avatar) { grid-column: 2; }
+  body[data-page="top"] .side h1 { font-size: 24px; }
+  body[data-page="top"] .side .role { margin-top: 2px; font-size: 15px; }
+  body[data-page="top"] .side .tagline { font-size: 14px; letter-spacing: .18em; line-height: 1.6; }
+  body[data-page="top"] .side .loc { font-size: 13px; line-height: 1.5; }
+  body[data-page="top"] .theme-dots { gap: 6px; margin-left: -4px; }
 }
 @media (max-width: 640px) {
   :root { --gap: 14px; }
