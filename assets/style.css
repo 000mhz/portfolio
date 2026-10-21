@@ -438,6 +438,9 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .t-works .text { padding: 0; }
   .t-works .text .arrow { position: absolute; top: 18px; right: 18px; }
   .t-works .thumbs { display: none; }
+  /* Profile and Studies side by side, one cell each */
+  .bento > .t-link.w2, .bento > .t-works.w4 { grid-column: span 1; }
+  .t-link h2 { font-size: 24px; }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
   .w-list { --w-cols: 40px minmax(0, 1fr) 84px; }
   .w-row { row-gap: 16px; padding-top: 16px; }
