@@ -22,10 +22,21 @@
     return "";
   }
 
+  // 時刻：神奈川（日本時間・UTC+9、夏時間なし）。アナログ時計の秒針はなめらかに回す
   function tick() {
-    const el = $("now-time");
-    if (el) el.textContent = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
+    const el = $("now-clock");
+    if (el) el.setAttribute("aria-label", "Time in Kanagawa " + new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()));
   }
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  function hands() {
+    const t = (Date.now() / 1000 + 9 * 3600) % 86400;
+    const sec = still.matches ? Math.floor(t % 60) : t % 60; // 動きを減らす設定なら1秒ずつ刻む
+    const set = (id, deg) => { const e = $(id); if (e) e.setAttribute("transform", "rotate(" + deg.toFixed(2) + " 20 20)"); };
+    set("c-s", sec * 6);
+    set("c-m", (t % 3600) / 10);
+    set("c-h", (t % 43200) / 120);
+  }
+  function loop() { hands(); requestAnimationFrame(loop); }
 
   async function weather() {
     try {
@@ -82,8 +93,9 @@
   }
 
   window.initNow = function () {
-    if (!$("now-time")) return;
+    if (!$("now-clock")) return;
     tick(); moon(); weather(); aurora();
+    if ($("now-clock")) loop();
     setInterval(tick, 20000);
     setInterval(() => { weather(); aurora(); moon(); }, 15 * 60000);
   };

@@ -203,6 +203,15 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .now-moon { width: 15px; height: 15px; flex: none; align-self: center; margin-right: 2px; }
 .now-moon-dark { fill: var(--soft); stroke: var(--line); stroke-width: .8; }
 .now-moon-lit { fill: var(--ink); }
+/* analog clock (Kanagawa) */
+.now-clock { width: 34px; height: 34px; flex: none; align-self: center; margin-right: 4px; }
+.now-clock .c-face { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+.now-clock .c-ticks line { stroke: var(--ink); stroke-width: 1; stroke-linecap: round; }
+.now-clock .c-h, .now-clock .c-m { stroke: var(--ink); stroke-linecap: round; }
+.now-clock .c-h { stroke-width: 2.2; }
+.now-clock .c-m { stroke-width: 1.4; }
+.now-clock .c-s line { stroke: #d4562a; stroke-width: .8; }
+.now-clock .c-s circle { fill: #d4562a; }
 /* wide Now tile (2 cells): three columns, readings aligned along the bottom */
 .t-now.is-wide { flex-direction: row; align-items: stretch; padding: 18px 20px 16px; }
 .t-now.is-wide .now-row { flex: 1; padding: 0 16px; border: 0; }
@@ -213,6 +222,7 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .t-now.is-wide .now-big { margin-top: auto; }
 .t-now.is-wide .now-big b { font-size: 28px; line-height: 1.1; }
 .t-now.is-wide .now-moon { width: 22px; height: 22px; margin-right: 4px; }
+.t-now.is-wide .now-clock { width: 50px; height: 50px; margin: 0; }
 .t-now.is-wide .now-sub { margin-top: 4px; }
 .t-now.is-wide .now-spark { width: 44px; }
 
