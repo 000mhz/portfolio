@@ -693,3 +693,17 @@ html[data-theme="win"] body[data-page="top"] .side { position: relative; top: 0;
 /* Now tile under the retro window chrome: less top padding so all three readings fit */
 html[data-theme="mac"] .t-now { padding: 26px 14px 8px; }
 html[data-theme="win"] .t-now { padding: 28px 14px 8px; }
+/* wide Now tile: scale readings with the tile's own width so nothing clips on narrower PC windows */
+.t-now.is-wide { container-type: inline-size; }
+.t-now.is-wide .now-row { min-width: 0; padding: 0 clamp(8px, 3.5cqi, 16px); }
+.t-now.is-wide .now-big b { font-size: clamp(18px, 7.2cqi, 28px); }
+.t-now.is-wide .now-big small { font-size: clamp(11px, 3cqi, 12px); }
+.t-now.is-wide .now-clock { width: clamp(34px, 13cqi, 50px); height: clamp(34px, 13cqi, 50px); }
+.t-now.is-wide .now-moon { width: clamp(16px, 5.6cqi, 22px); height: clamp(16px, 5.6cqi, 22px); margin-right: clamp(2px, 1cqi, 4px); }
+.t-now.is-wide .now-sub { font-size: clamp(11px, 3.2cqi, 12px); gap: clamp(4px, 2cqi, 8px); }
+.t-now.is-wide .now-spark { width: clamp(28px, 11cqi, 44px); }
+.t-now.is-wide .now-row:last-child { flex-grow: 1.45; }
+.t-now.is-wide .now-row:last-child .now-sub { white-space: normal; overflow: visible; line-height: 1.25; }
+@container (max-width: 300px) {
+  .t-now.is-wide .now-days { display: none; }
+}
