@@ -110,7 +110,7 @@ img { display: block; max-width: 100%; }
 .theme-dot svg { width: 22px; height: 22px; display: block; }
 .theme-dot:hover { transform: translateY(-2px); }
 .theme-dot[aria-pressed="true"] { outline: 1px solid var(--ink); outline-offset: 1px; }
-html[data-theme="dark"] .dot-default svg, html[data-theme="dark"] .dot-mac svg, html[data-theme="dark"] .dot-win svg { filter: drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff); }
+html[data-look="dark"] .dot-default svg, html[data-look="dark"] .dot-mac svg, html[data-look="dark"] .dot-win svg { filter: drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff); }
 /* menu: plain text links. PC stacks them under the profile; phones put them in a header with the site name */
 .side-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
 .side-nav a {
@@ -288,17 +288,17 @@ a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 .logo-cell:hover img { transform: scale(1.06); }
 .logo-cell span { position: absolute; left: 7px; bottom: 4px; font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums lining-nums; }
 .logo-lb img { width: min(560px, 100%); max-height: calc(100% - 60px); aspect-ratio: 1; object-fit: contain; background: #fff; }
-html[data-theme="dark"] .logo-cell { background: #fff; filter: invert(1); box-shadow: none; }
-html[data-theme="dark"] .logo-cell span { color: #707070; }
-html[data-theme="dark"] .logo-lb img { filter: invert(1); }
-html[data-theme="win"] .logo-cell, html[data-theme="mac"] .logo-cell { border-radius: 0; }
-html[data-theme="win"] .logo-cell { box-shadow: var(--in); }
+html[data-look="dark"] .logo-cell { background: #fff; filter: invert(1); box-shadow: none; }
+html[data-look="dark"] .logo-cell span { color: #707070; }
+html[data-look="dark"] .logo-lb img { filter: invert(1); }
+html[data-look="win"] .logo-cell, html[data-look="mac"] .logo-cell { border-radius: 0; }
+html[data-look="win"] .logo-cell { box-shadow: var(--in); }
 @media (max-width: 640px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; } }
 
 /* ---------- Text: 400字詰め原稿用紙（縦組） ---------- */
 :root { --gk-line: rgba(190, 86, 66, .34); --gk-paper: #fffdf8; }
-html[data-theme="dark"] { --gk-line: rgba(226, 140, 118, .3); --gk-paper: #161514; }
-html[data-theme="mac"], html[data-theme="win"] { --gk-paper: #fff; }
+html[data-look="dark"] { --gk-line: rgba(226, 140, 118, .3); --gk-paper: #161514; }
+html[data-look="mac"], html[data-look="win"] { --gk-paper: #fff; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .gk { container-type: inline-size; display: flex; flex-direction: column; gap: 28px; }
 .gk-sheet {
@@ -502,10 +502,10 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 }
 
 /* ================= themes =================
-   Chosen with the dots on Top, kept in localStorage, applied to <html data-theme> before paint. */
+   Chosen with the dots on Top, kept in localStorage, applied to <html data-look> before paint (not data-theme, which hosts like the Claude preview set themselves). */
 
 /* ---------- dark ---------- */
-html[data-theme="dark"] {
+html[data-look="dark"] {
   --bg: #121212;
   --tile: #1a1a1a;
   --ink: #ececec;
@@ -522,7 +522,7 @@ html[data-theme="dark"] {
 }
 
 /* ---------- Mac OS 8 (Platinum) ---------- */
-html[data-theme="mac"] {
+html[data-look="mac"] {
   --bg: #7072b4;
   --tile: #dddddd;
   --ink: #000;
@@ -540,36 +540,36 @@ html[data-theme="mac"] {
   --font: "Geneva", "Osaka", "Hiragino Sans", "Yu Gothic", sans-serif;
   --header-h: 26px;
 }
-html[data-theme="mac"] body {
+html[data-look="mac"] body {
   background-color: var(--bg);
   background-image: radial-gradient(rgba(255, 255, 255, .16) 1px, transparent 1.2px);
   background-size: 4px 4px;
   -webkit-font-smoothing: auto;
 }
-html[data-theme="mac"] :focus-visible { outline: 2px solid #000; outline-offset: 1px; border-radius: 0; }
+html[data-look="mac"] :focus-visible { outline: 2px solid #000; outline-offset: 1px; border-radius: 0; }
 /* menu bar */
-html[data-theme="mac"] .site-header { background: #dddddd; border-bottom: 1px solid #000; }
-html[data-theme="mac"] .site-header-in { padding: 0 14px; }
-html[data-theme="mac"] .site-name,
-html[data-theme="mac"] .side-nav a { font-family: var(--font-gothic); font-weight: 700; font-size: 13px; letter-spacing: 0; color: #000; line-height: var(--header-h); }
-html[data-theme="mac"] .side-nav { gap: 0; }
-html[data-theme="mac"] .side-nav a { padding: 0 10px; }
-html[data-theme="mac"] .side-nav a:hover,
-html[data-theme="mac"] .side-nav a[aria-current="page"] { background: #000; color: #fff; }
+html[data-look="mac"] .site-header { background: #dddddd; border-bottom: 1px solid #000; }
+html[data-look="mac"] .site-header-in { padding: 0 14px; }
+html[data-look="mac"] .site-name,
+html[data-look="mac"] .side-nav a { font-family: var(--font-gothic); font-weight: 700; font-size: 13px; letter-spacing: 0; color: #000; line-height: var(--header-h); }
+html[data-look="mac"] .side-nav { gap: 0; }
+html[data-look="mac"] .side-nav a { padding: 0 10px; }
+html[data-look="mac"] .side-nav a:hover,
+html[data-look="mac"] .side-nav a[aria-current="page"] { background: #000; color: #fff; }
 /* windows: tiles, the left column, and the content of inner pages */
-html[data-theme="mac"] .tile,
-html[data-theme="mac"] .side,
-html[data-theme="mac"] body:not([data-page="top"]) #main {
+html[data-look="mac"] .tile,
+html[data-look="mac"] .side,
+html[data-look="mac"] body:not([data-page="top"]) #main {
   border: 1px solid #000;
   box-shadow: var(--shadow);
   padding-top: 40px;
 }
-html[data-theme="mac"] .side,
-html[data-theme="mac"] body:not([data-page="top"]) #main { background: #fff; padding: 40px 22px 24px; }
-html[data-theme="mac"] body:not([data-page="top"]) #main { position: relative; }
-html[data-theme="mac"] .tile::before,
-html[data-theme="mac"] .side::before,
-html[data-theme="mac"] body:not([data-page="top"]) #main::before {
+html[data-look="mac"] .side,
+html[data-look="mac"] body:not([data-page="top"]) #main { background: #fff; padding: 40px 22px 24px; }
+html[data-look="mac"] body:not([data-page="top"]) #main { position: relative; }
+html[data-look="mac"] .tile::before,
+html[data-look="mac"] .side::before,
+html[data-look="mac"] body:not([data-page="top"]) #main::before {
   content: "";
   position: absolute;
   top: 0;
@@ -580,9 +580,9 @@ html[data-theme="mac"] body:not([data-page="top"]) #main::before {
   background: repeating-linear-gradient(#999 0 1px, #f4f4f4 1px 2px) 24px 4px / calc(100% - 48px) 11px no-repeat, #dddddd;
   z-index: 1;
 }
-html[data-theme="mac"] .tile::after,
-html[data-theme="mac"] .side::after,
-html[data-theme="mac"] body:not([data-page="top"]) #main::after {
+html[data-look="mac"] .tile::after,
+html[data-look="mac"] .side::after,
+html[data-look="mac"] body:not([data-page="top"]) #main::after {
   content: "";
   position: absolute;
   top: 4px;
@@ -594,33 +594,33 @@ html[data-theme="mac"] body:not([data-page="top"]) #main::after {
   box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
   z-index: 2;
 }
-html[data-theme="mac"] a.tile:hover { transform: none; }
-html[data-theme="mac"] a.tile:active { background: #bbbbbb; }
-html[data-theme="mac"] .t-mv { padding: 20px 0 0; }
-html[data-theme="mac"] .t-works { padding-top: 34px; }
-html[data-theme="mac"] .icon-chip { background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
-html[data-theme="mac"] .insta-grid a,
-html[data-theme="mac"] .insta-grid .ph { background: #c4c4c4; box-shadow: inset 1px 1px 0 #888, inset -1px -1px 0 #fff; }
-html[data-theme="mac"] .side .avatar,
-html[data-theme="mac"] .p-photo { border-color: #000; }
-html[data-theme="mac"] .side h1,
-html[data-theme="mac"] .side .page-title,
-html[data-theme="mac"] .t-link h2,
-html[data-theme="mac"] .w-title,
-html[data-theme="mac"] .p-name { font-family: var(--font-gothic); font-weight: 700; letter-spacing: 0; }
-html[data-theme="mac"] .side h1,
-html[data-theme="mac"] .side .page-title { font-size: 22px; }
-html[data-theme="mac"] .t-link h2 { font-size: 20px; }
-html[data-theme="mac"] .w-title { font-size: 17px; }
-html[data-theme="mac"] .side .tagline { letter-spacing: .12em; }
-html[data-theme="mac"] .chips a { border-radius: 4px; border-color: #000; background: #dddddd; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
-html[data-theme="mac"] .site-footer { color: #fff; }
-html[data-theme="mac"] .side .site-footer { color: var(--muted); }
-html[data-theme="mac"] .w-tabs button { letter-spacing: 0; }
-html[data-theme="mac"] .w-tabs button[aria-current="true"] { background: #000; color: #fff; padding: 0 6px; }
+html[data-look="mac"] a.tile:hover { transform: none; }
+html[data-look="mac"] a.tile:active { background: #bbbbbb; }
+html[data-look="mac"] .t-mv { padding: 20px 0 0; }
+html[data-look="mac"] .t-works { padding-top: 34px; }
+html[data-look="mac"] .icon-chip { background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
+html[data-look="mac"] .insta-grid a,
+html[data-look="mac"] .insta-grid .ph { background: #c4c4c4; box-shadow: inset 1px 1px 0 #888, inset -1px -1px 0 #fff; }
+html[data-look="mac"] .side .avatar,
+html[data-look="mac"] .p-photo { border-color: #000; }
+html[data-look="mac"] .side h1,
+html[data-look="mac"] .side .page-title,
+html[data-look="mac"] .t-link h2,
+html[data-look="mac"] .w-title,
+html[data-look="mac"] .p-name { font-family: var(--font-gothic); font-weight: 700; letter-spacing: 0; }
+html[data-look="mac"] .side h1,
+html[data-look="mac"] .side .page-title { font-size: 22px; }
+html[data-look="mac"] .t-link h2 { font-size: 20px; }
+html[data-look="mac"] .w-title { font-size: 17px; }
+html[data-look="mac"] .side .tagline { letter-spacing: .12em; }
+html[data-look="mac"] .chips a { border-radius: 4px; border-color: #000; background: #dddddd; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888; }
+html[data-look="mac"] .site-footer { color: #fff; }
+html[data-look="mac"] .side .site-footer { color: var(--muted); }
+html[data-look="mac"] .w-tabs button { letter-spacing: 0; }
+html[data-look="mac"] .w-tabs button[aria-current="true"] { background: #000; color: #fff; padding: 0 6px; }
 
 /* ---------- Windows 95 ---------- */
-html[data-theme="win"] {
+html[data-look="win"] {
   --bg: #008080;
   --tile: #c0c0c0;
   --ink: #000;
@@ -640,41 +640,41 @@ html[data-theme="win"] {
   --font: "MS PGothic", "MS UI Gothic", Tahoma, "Hiragino Sans", "Yu Gothic", sans-serif;
   --header-h: 30px;
 }
-html[data-theme="win"] body { -webkit-font-smoothing: none; }
-html[data-theme="win"] :focus-visible { outline: 1px dotted #000; outline-offset: -4px; border-radius: 0; }
+html[data-look="win"] body { -webkit-font-smoothing: none; }
+html[data-look="win"] :focus-visible { outline: 1px dotted #000; outline-offset: -4px; border-radius: 0; }
 /* taskbar at the bottom */
-html[data-theme="win"] .site-header { top: auto; bottom: 0; padding: 0 0 env(safe-area-inset-bottom, 0px); background: #c0c0c0; box-shadow: inset 0 1px 0 #dfdfdf, inset 0 2px 0 #fff; }
-html[data-theme="win"] .site-header-in { max-width: none; padding: 0 3px; justify-content: flex-start; gap: 6px; }
-html[data-theme="win"] .site-name,
-html[data-theme="win"] .side-nav a {
+html[data-look="win"] .site-header { top: auto; bottom: 0; padding: 0 0 env(safe-area-inset-bottom, 0px); background: #c0c0c0; box-shadow: inset 0 1px 0 #dfdfdf, inset 0 2px 0 #fff; }
+html[data-look="win"] .site-header-in { max-width: none; padding: 0 3px; justify-content: flex-start; gap: 6px; }
+html[data-look="win"] .site-name,
+html[data-look="win"] .side-nav a {
   font-family: var(--font); font-weight: 700; font-size: 12px; letter-spacing: 0; line-height: 22px; color: #000;
   padding: 0 10px; background: #c0c0c0; box-shadow: var(--out);
 }
-html[data-theme="win"] .side-nav { gap: 3px; flex-wrap: nowrap; justify-content: flex-start; padding-left: 6px; border-left: 1px solid #808080; box-shadow: 1px 0 0 #fff inset; }
-html[data-theme="win"] .side-nav a { min-width: 72px; font-weight: 400; }
-html[data-theme="win"] .side-nav a[aria-current="page"] {
+html[data-look="win"] .side-nav { gap: 3px; flex-wrap: nowrap; justify-content: flex-start; padding-left: 6px; border-left: 1px solid #808080; box-shadow: 1px 0 0 #fff inset; }
+html[data-look="win"] .side-nav a { min-width: 72px; font-weight: 400; }
+html[data-look="win"] .side-nav a[aria-current="page"] {
   box-shadow: var(--in); font-weight: 700;
   background: repeating-conic-gradient(#fff 0 25%, #c0c0c0 0 50%) 0 0 / 2px 2px;
 }
-html[data-theme="win"] .side-nav a:active, html[data-theme="win"] .site-name:active { box-shadow: var(--in); }
-html[data-theme="win"] .layout { padding-top: 16px; padding-bottom: calc(var(--header-h) + 24px); }
-html[data-theme="win"] .side { top: 16px; }
+html[data-look="win"] .side-nav a:active, html[data-look="win"] .site-name:active { box-shadow: var(--in); }
+html[data-look="win"] .layout { padding-top: 16px; padding-bottom: calc(var(--header-h) + 24px); }
+html[data-look="win"] .side { top: 16px; }
 /* windows */
-html[data-theme="win"] .tile,
-html[data-theme="win"] .side,
-html[data-theme="win"] body:not([data-page="top"]) #main {
+html[data-look="win"] .tile,
+html[data-look="win"] .side,
+html[data-look="win"] body:not([data-page="top"]) #main {
   border: 0;
   background: #c0c0c0;
   box-shadow: var(--out);
   padding-top: 32px;
 }
-html[data-theme="win"] .side,
-html[data-theme="win"] body:not([data-page="top"]) #main { padding: 30px 20px 22px; }
-html[data-theme="win"] body:not([data-page="top"]) #main { position: relative; }
-html[data-theme="win"] body:not([data-page="top"]) #main > * { position: relative; }
-html[data-theme="win"] .tile::before,
-html[data-theme="win"] .side::before,
-html[data-theme="win"] body:not([data-page="top"]) #main::before {
+html[data-look="win"] .side,
+html[data-look="win"] body:not([data-page="top"]) #main { padding: 30px 20px 22px; }
+html[data-look="win"] body:not([data-page="top"]) #main { position: relative; }
+html[data-look="win"] body:not([data-page="top"]) #main > * { position: relative; }
+html[data-look="win"] .tile::before,
+html[data-look="win"] .side::before,
+html[data-look="win"] body:not([data-page="top"]) #main::before {
   content: attr(data-title);
   position: absolute;
   top: 3px; left: 3px; right: 3px;
@@ -686,9 +686,9 @@ html[data-theme="win"] body:not([data-page="top"]) #main::before {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   z-index: 1;
 }
-html[data-theme="win"] .tile::after,
-html[data-theme="win"] .side::after,
-html[data-theme="win"] body:not([data-page="top"]) #main::after {
+html[data-look="win"] .tile::after,
+html[data-look="win"] .side::after,
+html[data-look="win"] body:not([data-page="top"]) #main::after {
   content: "×";
   position: absolute;
   top: 5px; right: 5px;
@@ -700,47 +700,47 @@ html[data-theme="win"] body:not([data-page="top"]) #main::after {
   text-align: center;
   z-index: 2;
 }
-html[data-theme="win"] a.tile:hover { transform: none; }
-html[data-theme="win"] a.tile:active { box-shadow: var(--in); }
-html[data-theme="win"] .t-mv { padding: 24px 3px 3px; }
-html[data-theme="win"] .t-works { padding-top: 30px; }
-html[data-theme="win"] .icon-chip { background: #c0c0c0; border: 0; box-shadow: var(--out); }
-html[data-theme="win"] .insta-grid a,
-html[data-theme="win"] .insta-grid .ph { background: #fff; box-shadow: var(--in); }
-html[data-theme="win"] .side .avatar,
-html[data-theme="win"] .p-photo { border: 0; box-shadow: 0 0 0 2px #808080, 0 0 0 3px #fff; }
-html[data-theme="win"] .side h1,
-html[data-theme="win"] .side .page-title,
-html[data-theme="win"] .t-link h2,
-html[data-theme="win"] .w-title,
-html[data-theme="win"] .p-name { font-family: var(--font); font-weight: 700; letter-spacing: 0; }
-html[data-theme="win"] .side h1,
-html[data-theme="win"] .side .page-title { font-size: 22px; }
-html[data-theme="win"] .t-link h2 { font-size: 20px; }
-html[data-theme="win"] .w-title { font-size: 17px; }
-html[data-theme="win"] .side .tagline { letter-spacing: .12em; }
-html[data-theme="win"] .chips a { border: 0; border-radius: 0; background: #c0c0c0; box-shadow: var(--out); }
-html[data-theme="win"] .chips a:active { box-shadow: var(--in); }
-html[data-theme="win"] .site-footer { color: #fff; }
-html[data-theme="win"] .side .site-footer { color: var(--muted); }
+html[data-look="win"] a.tile:hover { transform: none; }
+html[data-look="win"] a.tile:active { box-shadow: var(--in); }
+html[data-look="win"] .t-mv { padding: 24px 3px 3px; }
+html[data-look="win"] .t-works { padding-top: 30px; }
+html[data-look="win"] .icon-chip { background: #c0c0c0; border: 0; box-shadow: var(--out); }
+html[data-look="win"] .insta-grid a,
+html[data-look="win"] .insta-grid .ph { background: #fff; box-shadow: var(--in); }
+html[data-look="win"] .side .avatar,
+html[data-look="win"] .p-photo { border: 0; box-shadow: 0 0 0 2px #808080, 0 0 0 3px #fff; }
+html[data-look="win"] .side h1,
+html[data-look="win"] .side .page-title,
+html[data-look="win"] .t-link h2,
+html[data-look="win"] .w-title,
+html[data-look="win"] .p-name { font-family: var(--font); font-weight: 700; letter-spacing: 0; }
+html[data-look="win"] .side h1,
+html[data-look="win"] .side .page-title { font-size: 22px; }
+html[data-look="win"] .t-link h2 { font-size: 20px; }
+html[data-look="win"] .w-title { font-size: 17px; }
+html[data-look="win"] .side .tagline { letter-spacing: .12em; }
+html[data-look="win"] .chips a { border: 0; border-radius: 0; background: #c0c0c0; box-shadow: var(--out); }
+html[data-look="win"] .chips a:active { box-shadow: var(--in); }
+html[data-look="win"] .site-footer { color: #fff; }
+html[data-look="win"] .side .site-footer { color: var(--muted); }
 /* Studies: white list box inside the window, navy selection */
-html[data-theme="win"] .w-list { background: #fff; box-shadow: var(--in); padding: 4px 8px 8px; }
-html[data-theme="win"] a.w-row:hover .w-year, html[data-theme="win"] a.w-row:hover .w-title, html[data-theme="win"] a.w-row:hover .w-cat,
-html[data-theme="win"] a.w-row:focus-visible .w-year, html[data-theme="win"] a.w-row:focus-visible .w-title, html[data-theme="win"] a.w-row:focus-visible .w-cat,
-html[data-theme="win"] button.w-row:hover .w-year, html[data-theme="win"] button.w-row:hover .w-title, html[data-theme="win"] button.w-row:hover .w-cat { color: #fff; }
-html[data-theme="win"] .w-tabs { gap: 0; margin-bottom: -2px; position: relative; z-index: 1; }
-html[data-theme="win"] .w-tabs button { font-family: var(--font); font-weight: 400; font-size: 12px; letter-spacing: 0; padding: 2px 12px; background: #c0c0c0; box-shadow: inset 1px 1px 0 #fff, inset -1px 0 0 #000, inset -2px 0 0 #808080; }
-html[data-theme="win"] .w-tabs button[aria-current="true"] { font-weight: 700; padding-top: 4px; margin-top: -2px; }
-html[data-theme="win"] .profile-panel { background: #fff; box-shadow: var(--in); padding: 20px; max-width: none; }
+html[data-look="win"] .w-list { background: #fff; box-shadow: var(--in); padding: 4px 8px 8px; }
+html[data-look="win"] a.w-row:hover .w-year, html[data-look="win"] a.w-row:hover .w-title, html[data-look="win"] a.w-row:hover .w-cat,
+html[data-look="win"] a.w-row:focus-visible .w-year, html[data-look="win"] a.w-row:focus-visible .w-title, html[data-look="win"] a.w-row:focus-visible .w-cat,
+html[data-look="win"] button.w-row:hover .w-year, html[data-look="win"] button.w-row:hover .w-title, html[data-look="win"] button.w-row:hover .w-cat { color: #fff; }
+html[data-look="win"] .w-tabs { gap: 0; margin-bottom: -2px; position: relative; z-index: 1; }
+html[data-look="win"] .w-tabs button { font-family: var(--font); font-weight: 400; font-size: 12px; letter-spacing: 0; padding: 2px 12px; background: #c0c0c0; box-shadow: inset 1px 1px 0 #fff, inset -1px 0 0 #000, inset -2px 0 0 #808080; }
+html[data-look="win"] .w-tabs button[aria-current="true"] { font-weight: 700; padding-top: 4px; margin-top: -2px; }
+html[data-look="win"] .profile-panel { background: #fff; box-shadow: var(--in); padding: 20px; max-width: none; }
 /* window chrome needs the left column to be a positioning box where it isn't sticky (Top on PC, all phones) */
-html[data-theme="mac"] body[data-page="top"] .side,
-html[data-theme="win"] body[data-page="top"] .side { position: relative; top: 0; }
+html[data-look="mac"] body[data-page="top"] .side,
+html[data-look="win"] body[data-page="top"] .side { position: relative; top: 0; }
 @media (max-width: 960px) {
-  html[data-theme="mac"] .side, html[data-theme="win"] .side { position: relative; top: 0; }
+  html[data-look="mac"] .side, html[data-look="win"] .side { position: relative; top: 0; }
 }
 /* Now tile under the retro window chrome: less top padding so all three readings fit */
-html[data-theme="mac"] .t-now { padding: 26px 14px 8px; }
-html[data-theme="win"] .t-now { padding: 28px 14px 8px; }
+html[data-look="mac"] .t-now { padding: 26px 14px 8px; }
+html[data-look="win"] .t-now { padding: 28px 14px 8px; }
 /* wide Now tile: scale readings with the tile's own width so nothing clips on narrower PC windows */
 .t-now.is-wide { container-type: inline-size; }
 .t-now.is-wide .now-row { min-width: 0; padding: 0 clamp(8px, 3.5cqi, 16px); }

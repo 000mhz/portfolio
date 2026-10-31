@@ -5,12 +5,12 @@
   var THEMES = ["dark", "mac", "win"];
   window.applyTheme = function (t) {
     if (THEMES.indexOf(t) < 0) t = "";
-    if (t) d.dataset.theme = t;
-    else delete d.dataset.theme;
-    try { t ? localStorage.setItem("theme", t) : localStorage.removeItem("theme"); } catch (e) {}
+    if (t) d.dataset.look = t;
+    else delete d.dataset.look;
+    try { t ? localStorage.setItem("look", t) : localStorage.removeItem("look"); } catch (e) {}
   };
   var saved = null;
-  try { saved = localStorage.getItem("theme"); } catch (e) {}
-  if (saved && THEMES.indexOf(saved) >= 0) d.dataset.theme = saved;
+  try { saved = localStorage.getItem("look"); } catch (e) {}
+  if (saved && THEMES.indexOf(saved) >= 0) d.dataset.look = saved;
   else if (saved) window.applyTheme(""); // 廃止したテーマが保存されていたら元に戻す
 })();
