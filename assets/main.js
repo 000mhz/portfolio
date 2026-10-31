@@ -39,6 +39,7 @@ function renderSide(site, current) {
     ["Top", "", "top"],
     ["Profile", "profile", "profile"],
     ["Studies", "works", "works"],
+    ["Text", "text", "text"],
   ]
     .map(([label, dir, key]) =>
       `<a href="${pageUrl(dir)}"${key === (current === "logos" ? "works" : current) ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -57,7 +58,7 @@ function renderSide(site, current) {
 
   // Top以外のページは左カラムを空にして、中身の位置だけTopとそろえる
   if (current !== "top") {
-    const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365" };
+    const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365", text: "Text" };
     $("#side").classList.add("is-compact");
     $("#side").innerHTML = `<h1 class="page-title">${titles[current] || ""}</h1>` +
       (current === "logos" ? `<p class="page-meta">2013 · <i>Graphic Design</i><br>365 logos, one a day</p><a class="page-back" href="${pageUrl("works")}">← Studies</a>` : "");
@@ -123,7 +124,7 @@ async function loadInstagram(cfg) {
 }
 
 async function renderTop(site) {
-  const works = await getJSON("data/works.json");
+  const [works, texts] = await Promise.all([getJSON("data/works.json"), getJSON("data/texts.json").catch(() => [])]);
   // メインビジュアル：Worksの画像からランダムに1枚（横長だけ。縦位置・正方形はトリミングで崩れるので除外）
   // 作品に "mv" があればトップ用にその画像を使う（サムネイルが縦長・正方形の作品向け）
   const pool = works
@@ -179,8 +180,11 @@ async function renderTop(site) {
       </section>
       ${nowTile}
       ${snsTiles}
-      <a class="tile t-link w2" data-title="Profile" href="${pageUrl("profile")}">
+      <a class="tile t-link" data-title="Profile" href="${pageUrl("profile")}">
         <span class="arrow">→</span><h2>Profile</h2><p>About me</p>
+      </a>
+      <a class="tile t-link" data-title="Text" href="${pageUrl("text")}">
+        <span class="arrow">→</span><h2>Text</h2><p>${texts.length} pieces</p>
       </a>
       <a class="tile t-link t-works w4" data-title="Studies" href="${pageUrl("works")}">
         <span class="text"><span class="arrow">→</span><h2>Studies</h2><p>${works.length} pieces</p></span>
@@ -343,13 +347,94 @@ async function renderLogos() {
   });
 }
 
+// ---------- Text：一覧（Studiesと同じ罫線リスト）と、400字詰め原稿用紙の縦組ビュー ----------
+const GK = { cols: 20, rows: 20 }; // 20字×20行 ＝ 400字
+const HANG = "、。，．」』）〕】"; // 行頭に来ないよう前の行の最後のマスにぶら下げる文字
+
+// 原稿用紙の書き方に沿ってマスに割り付ける：1行目に題名（上を2マス空ける）、2行目に名前（下を1マス空ける）、
+// 3行目から本文。段落の頭は1マス下げ、「で始まる段落は下げない。
+function layoutManuscript(title, name, body) {
+  const cols = [];
+  const col = () => { const c = new Array(GK.rows).fill(""); cols.push(c); return c; };
+  const put = (c, r, s) => { for (const ch of s) { if (r >= GK.rows) break; c[r++] = ch; } };
+  put(col(), 2, title);
+  const nc = col(); put(nc, Math.max(0, GK.rows - 1 - [...name].length), name);
+  for (const para of body.split("\n")) {
+    let c = col(), r = para.startsWith("「") ? 0 : 1;
+    for (const ch of para) {
+      if (r === GK.rows) {
+        if (HANG.includes(ch)) { c[GK.rows - 1] += ch; continue; }
+        c = col(); r = 0;
+      }
+      c[r++] = ch;
+    }
+  }
+  const pages = [];
+  for (let i = 0; i < cols.length; i += GK.cols) pages.push(cols.slice(i, i + GK.cols));
+  return pages;
+}
+
+function sheetHTML(page, n, total) {
+  let cells = "";
+  for (let c = 0; c < GK.cols; c++) {
+    // 右から左へ。右半分→柱（中央の余白）→左半分
+    const gc = c < 10 ? 21 - c : 20 - c;
+    for (let r = 0; r < GK.rows; r++) {
+      const s = (page[c] && page[c][r]) || "";
+      const ch = [...s];
+      const inner = ch.length > 1 ? esc(ch[0]) + `<i class="gk-hang">${esc(ch.slice(1).join(""))}</i>` : esc(s);
+      cells += `<span class="gk-cell" style="grid-column:${gc};grid-row:${r + 1}">${inner}</span>`;
+    }
+  }
+  return `<figure class="gk-sheet"><div class="gk-grid"><span class="gk-gutter" aria-hidden="true"></span>${cells}</div>
+    <figcaption><span>20×20</span><span>${n} / ${total}</span></figcaption></figure>`;
+}
+
+async function renderText(site) {
+  const texts = await getJSON("data/texts.json");
+  const name = (site.profile && site.profile.ja && site.profile.ja.name) || site.name || "";
+  const count = (t) => [...t.body.replace(/\n/g, "")].length;
+  const show = () => {
+    const id = decodeURIComponent((location.hash || "").slice(1));
+    const t = texts.find((x) => x.id === id);
+    const side = $("#side");
+    if (!t) {
+      side.innerHTML = `<h1 class="page-title">Text</h1>`;
+      document.title = "Text — " + (site.siteName || site.name);
+      $("#main").innerHTML = `<ul class="w-list">
+        <li class="w-rules" aria-hidden="true"><i></i><i></i><i></i></li>
+        ${texts.map((x) => `<li><a class="w-row" href="#${encodeURIComponent(x.id)}">
+          <span class="w-year">${esc(x.date.replace(/-/g, "."))}</span>
+          <span class="w-title">${esc(x.title)}</span>
+          <span class="w-cat">${count(x)}字</span>
+          <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i></a></li>`).join("")}
+      </ul>`;
+      $("#main").classList.remove("is-reader");
+      return;
+    }
+    side.innerHTML = `<h1 class="page-title">Text</h1>
+      <p class="page-meta">${esc(t.date.replace(/-/g, "."))}<br>${count(t)}字</p>
+      <a class="page-back" href="#">← Text</a>`;
+    document.title = t.title + " — Text — " + (site.siteName || site.name);
+    const pages = layoutManuscript(t.title, name, t.body);
+    $("#main").classList.add("is-reader");
+    $("#main").innerHTML = `<article class="gk" lang="ja" aria-label="${esc(t.title)}">
+      <p class="visually-hidden">${esc(t.title)}　${esc(name)}　${esc(t.body)}</p>
+      <div aria-hidden="true">${pages.map((p, i) => sheetHTML(p, i + 1, pages.length)).join("")}</div>
+    </article>`;
+    scrollTo(0, 0);
+  };
+  show();
+  addEventListener("hashchange", show);
+}
+
 (async () => {
   const page = document.body.dataset.page;
   const site = await getJSON("data/site.json");
-  const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365" };
+  const titles = { profile: "Profile", works: "Studies", members: "Members", logos: "Logos of 365", text: "Text" };
   document.title = page === "top" ? site.siteName || site.name : `${titles[page] || page} — ${site.siteName || site.name}`;
   renderSide(site, page);
-  const render = { top: renderTop, profile: renderProfile, works: renderWorks, logos: renderLogos }[page];
+  const render = { top: renderTop, profile: renderProfile, works: renderWorks, logos: renderLogos, text: renderText }[page];
   if (render) await render(site);
   if (page === "profile") wireMail($("#main"));
 })();

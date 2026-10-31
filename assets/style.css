@@ -295,6 +295,52 @@ html[data-theme="win"] .logo-cell, html[data-theme="mac"] .logo-cell { border-ra
 html[data-theme="win"] .logo-cell { box-shadow: var(--in); }
 @media (max-width: 640px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; } }
 
+/* ---------- Text: 400字詰め原稿用紙（縦組） ---------- */
+:root { --gk-line: rgba(190, 86, 66, .34); --gk-paper: #fffdf8; }
+html[data-theme="dark"] { --gk-line: rgba(226, 140, 118, .3); --gk-paper: #161514; }
+html[data-theme="mac"], html[data-theme="win"] { --gk-paper: #fff; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.gk { container-type: inline-size; display: flex; flex-direction: column; gap: 28px; }
+.gk-sheet {
+  /* 1マス＋行間で20行、中央に柱 */
+  --c: min(34px, calc((100cqw - 4px) / 26.2)); /* cqw: the cells are vertical, so use the physical width */
+  --g: calc(var(--c) * .2);
+  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+}
+.gk-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, var(--c)) calc(var(--c) * 1.1) repeat(10, var(--c));
+  grid-template-rows: repeat(20, var(--c));
+  column-gap: var(--g);
+  padding: calc(var(--c) * .5) calc(var(--c) * .45);
+  background: var(--gk-paper);
+  outline: 1px solid var(--gk-line);
+  outline-offset: -3px;
+  border: 1px solid var(--gk-line);
+}
+.gk-gutter { grid-column: 11; grid-row: 1 / -1; position: relative; }
+.gk-gutter::before, .gk-gutter::after { content: ""; position: absolute; left: 50%; width: 1px; height: calc(var(--c) * 1.2); background: var(--gk-line); }
+.gk-gutter::before { top: 0; }
+.gk-gutter::after { bottom: 0; }
+.gk-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border: .5px solid var(--gk-line);
+  font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: calc(var(--c) * .66);
+  line-height: 1;
+  color: var(--ink);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-feature-settings: "vert" 1;
+}
+.gk-hang { position: absolute; top: 100%; left: 0; right: 0; text-align: center; font-style: normal; line-height: 1; }
+.gk-sheet figcaption { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums lining-nums; }
+
 /* works list: year · title · category */
 /* rules are drawn per cell, with an 8px gap between columns */
 .w-list { list-style: none; --w-cols: 64px minmax(0, 1fr) 140px; }
@@ -439,7 +485,6 @@ a.work:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .t-works .text .arrow { position: absolute; top: 18px; right: 18px; }
   .t-works .thumbs { display: none; }
   /* Profile and Studies side by side, one cell each */
-  .bento > .t-link.w2, .bento > .t-works.w4 { grid-column: span 1; }
   .t-link h2 { font-size: 24px; }
   .works-grid { grid-template-columns: minmax(0, 1fr); }
   .w-list { --w-cols: 40px minmax(0, 1fr) 84px; }
