@@ -39,7 +39,7 @@ function renderSide(site, current) {
     ["Top", "", "top"],
     ["Profile", "profile", "profile"],
     ["Studies", "works", "works"],
-    ["Text", "text", "text"],
+    ...(site.showText === false ? [] : [["Text", "text", "text"]]),
   ]
     .map(([label, dir, key]) =>
       `<a href="${pageUrl(dir)}"${key === (current === "logos" ? "works" : current) ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -124,6 +124,8 @@ async function loadInstagram(cfg) {
 }
 
 async function renderTop(site) {
+  // Textは未完成のあいだ隠す（site.json の "showText": false）。ページ自体は /text/ に残る
+  const showText = site.showText !== false;
   const [works, texts] = await Promise.all([getJSON("data/works.json"), getJSON("data/texts.json").catch(() => [])]);
   // メインビジュアル：Worksの画像からランダムに1枚（横長だけ。縦位置・正方形はトリミングで崩れるので除外）
   // 作品に "mv" があればトップ用にその画像を使う（サムネイルが縦長・正方形の作品向け）
@@ -180,13 +182,13 @@ async function renderTop(site) {
       </section>
       ${nowTile}
       ${snsTiles}
-      <a class="tile t-link" data-title="Profile" href="${pageUrl("profile")}">
+      <a class="tile t-link${showText ? "" : " w2"}" data-title="Profile" href="${pageUrl("profile")}">
         <span class="arrow">→</span><h2>Profile</h2><p>About me</p>
       </a>
-      <a class="tile t-link" data-title="Text" href="${pageUrl("text")}">
+      ${showText ? `<a class="tile t-link" data-title="Text" href="${pageUrl("text")}">
         <span class="arrow">→</span><h2>Text</h2><p>${texts.length} pieces</p>
-      </a>
-      <a class="tile t-link t-works w4" data-title="Studies" href="${pageUrl("works")}">
+      </a>` : ""}
+      <a class="tile t-link t-works w4${showText ? "" : " is-paired"}" data-title="Studies" href="${pageUrl("works")}">
         <span class="text"><span class="arrow">→</span><h2>Studies</h2><p>${works.length} pieces</p></span>
         <span class="thumbs">${thumbs}</span>
       </a>
