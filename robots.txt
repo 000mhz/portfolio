@@ -1,0 +1,4 @@
+# 000mhz.org — 限定公開中。各ページの <meta name="robots" content="noindex"> で検索結果に出さない設定にしている。
+# ページを読んでもらわないと noindex が伝わらないため、ここではクロールを禁止しない。
+User-agent: *
+Allow: /
