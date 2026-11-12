@@ -240,7 +240,9 @@ async function renderProfile(site) {
 
 async function renderWorks(site) {
   const works = await getJSON("data/works.json");
-  const cats = site.workCategories || [...new Set(works.map((w) => w.category).filter(Boolean))];
+  // 作品が1点もないカテゴリ（今は Font）はタブを出さない。作品を足せば自動で現れる
+  const cats = (site.workCategories || [...new Set(works.map((w) => w.category).filter(Boolean))])
+    .filter((c) => works.some((w) => w.category === c));
   const slug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
   const row = (w, i) => {
